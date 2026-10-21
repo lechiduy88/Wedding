@@ -3,7 +3,7 @@
 Thiệp cưới online, một trang duy nhất. Khách mở link, kéo rèm, rồi trang tự trôi chậm xuống qua từng phần dưới đây.
 Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi để khách tự xem.
 
-> **Ký hiệu:** ✅ đã đúng với Nam & Lâm · ⚠️ vẫn là nội dung của thiệp cũ (Việt Phương & Ninh Hương), cần thay trước khi gửi.
+> **Ký hiệu:** ✅ đã đúng với Nam & Lâm · ⚠️ vẫn là nội dung mẫu cũ, cần thay trước khi gửi.
 
 ---
 
@@ -65,7 +65,7 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 ## 9. Sổ lưu bút — "Lời chúc của mọi người"
 - Lời chúc hiện thành dải cuộn vòng, có nút trái/phải.
 - Bên dưới là form gửi lời chúc: tên, mối quan hệ (gợi ý "Bạn đại học của Lâm" ✅), lời chúc, kèm các câu chúc mẫu.
-- Hiện đang đọc lời chúc từ sheet của cặp cũ ⚠️.
+- Chưa có backend nên lời chúc chỉ lưu trong trình duyệt của từng khách ⚠️.
 
 ## 10. Chân trang
 - "Hoài Nam & Hà Lâm" ✅ và dòng "18 · 10 · 2026 — Cảm ơn bạn đã ở bên chúng tôi!" (ngày ⚠️).
@@ -79,7 +79,7 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 ---
 
 ## Lưu ý chung trước khi gửi thiệp
-1. **Backend:** `apiEndpoint` trong `js/config.js` vẫn trỏ vào Google Sheet của cặp cũ. Cần tạo sheet mới theo `backend/README.md` và dán URL mới vào.
+1. **Backend:** `apiEndpoint` trong `js/config.js` đang để trống (chế độ demo: lời chúc chỉ lưu trong trình duyệt của từng khách). Cần tạo Google Sheet mới theo `backend/README.md` và dán URL vào.
 2. **Ảnh:** thư mục `assets/photos/` đang trống. Đặt ảnh thật vào đó, đổi tên theo quy tắc trong `assets/photos/README.md`.
 3. **Ngày, giờ, địa điểm, tên bố mẹ:** sửa trong `index.html`, các file `calendar/*.ics` và `js/config.js`.
-4. **Tên miền** `phuonghuongwedding.online` vẫn là của thiệp cũ.
+4. **Địa chỉ web:** `https://lechiduy88.github.io/Wedding/` (bật GitHub Pages cho repo). Có tên miền riêng thì thêm file `CNAME` và sửa link xem trước trong `index.html`.
