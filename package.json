@@ -1,7 +1,7 @@
 {
-  "name": "phuonghuongwedding",
+  "name": "wedding",
   "version": "1.0.0",
-  "description": "PhuongHuongWedding — thiệp cưới online của Việt Phương & Ninh Hương",
+  "description": "Wedding — thiệp cưới online của Hoài Nam & Hà Lâm",
   "private": true,
   "scripts": {
     "start": "npx --yes serve -l 3000 ."

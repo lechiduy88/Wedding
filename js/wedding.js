@@ -72,21 +72,47 @@
     toggle('#mung-cuoi', cfg.showGift);
     toggle('#luu-but', cfg.showGuestbook);
   }
+  // The album ring gets one card per photo: album-01 … album-NN (NN = albumCount in config.js)
+  function initAlbum() {
+    const stage = $('.wed-ring-stage');
+    if (!stage) return;
+    const count = Math.max(1, Number(cfg.albumCount) || 13);
+    for (let i = 1; i <= count; i++) {
+      const name = 'album-' + String(i).padStart(2, '0');
+      const card = document.createElement('figure');
+      card.className = 'wed-ring-card';
+      const slot = document.createElement('div');
+      slot.className = 'wed-slot';
+      slot.setAttribute('data-slot', name);
+      slot.setAttribute('data-alt', 'Ảnh cưới ' + i);
+      const cap = document.createElement('span');
+      cap.className = 'wed-slot-cap';
+      cap.textContent = name;
+      slot.append(cap);
+      card.append(slot);
+      stage.append(card);
+    }
+  }
+  // Each slot's data-slot is its file name in photoDir; the extension is found by trying the usual ones in turn
   function initPhotos() {
-    const photos = cfg.photos || {};
+    const dir = cfg.photoDir || 'assets/photos/';
+    const exts = ['jpg', 'jpeg', 'png', 'webp'];
     for (const slot of $$('[data-slot]')) {
-      const src = photos[slot.getAttribute('data-slot')];
-      if (!src) continue;
+      const base = dir + slot.getAttribute('data-slot');
       const img = new Image();
       img.alt = slot.getAttribute('data-alt') || '';
       img.decoding = 'async';
       if (!slot.hasAttribute('data-eager')) img.loading = 'lazy';
+      let tried = 0;
       img.addEventListener('load', () => {
         slot.classList.add('is-filled');
-        lightbox.add(slot, src, img.alt);
+        lightbox.add(slot, img.getAttribute('src'), img.alt);
       });
-      img.addEventListener('error', () => img.remove());
-      img.src = src;
+      img.addEventListener('error', () => {
+        if (++tried < exts.length) img.src = base + '.' + exts[tried];
+        else img.remove();
+      });
+      img.src = base + '.' + exts[0];
       slot.appendChild(img);
     }
   }
@@ -259,14 +285,16 @@
 
     return {
       add(slot, src, alt) {
-        const i = items.length;
-        items.push({ slot, src, alt });
+        const item = { slot, src, alt };
+        // Keep page order, whatever order the images finished loading in
+        const at = items.findIndex((it) => slot.compareDocumentPosition(it.slot) & Node.DOCUMENT_POSITION_FOLLOWING);
+        items.splice(at < 0 ? items.length : at, 0, item);
         slot.classList.add('is-zoomable');
         slot.tabIndex = 0;
         slot.setAttribute('role', 'button');
         slot.setAttribute('aria-label', 'Phóng to ảnh: ' + alt);
-        slot.addEventListener('click', () => open(i));
-        slot.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
+        slot.addEventListener('click', () => open(items.indexOf(item)));
+        slot.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(items.indexOf(item)); } });
       }
     };
   })();
@@ -304,6 +332,141 @@
         setTimeout(() => { btn.textContent = label; }, 1800);
       });
     }
+  }
+
+  /* ===== Album ring: the photos stand on a ring that turns slowly and without stopping.
+     Drag or swipe to spin it (it keeps the momentum, then settles back to its cruising speed),
+     tap a side photo or an arrow to glide that photo to the front, tap the front one to open it large. ===== */
+  function initRing() {
+    const ring = $('.wed-ring');
+    if (!ring) return;
+    const stage = $('.wed-ring-stage', ring), now = $('.wed-ring-now', ring);
+    const cards = $$('.wed-ring-card', ring), n = cards.length, step = 360 / n;
+    const CRUISE = reducedMotion ? 0 : step / 4.5; // degrees per second: one photo every 4.5s
+    const GLIDE_MS = 900, HOLD_MS = 2500;
+    const p = (i) => String(i + 1).padStart(2, '0');
+    const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    $('.wed-ring-total', ring).textContent = p(n - 1);
+    let angle = 0, vel = 0, active = -1, rx = 0, rz = 0, cw = 0;
+    let visible = false, hover = false, drag = null, glide = null, holdUntil = 0, raf = 0, last = 0, dragged = false;
+
+    const measure = () => {
+      const w = stage.clientWidth;
+      cw = cards[0].offsetWidth;
+      rx = Math.min(w * 0.42, 520);
+      rz = Math.min(w * 0.5, 400);
+    };
+    const render = () => {
+      cards.forEach((card, i) => {
+        const a = ((i * step - angle) % 360 + 540) % 360 - 180; // -180…180, 0 = front
+        const rad = a * Math.PI / 180, c = Math.cos(rad), d = (c + 1) / 2;
+        // Seen from slightly above: the far side of the ring rises, so the whole circle shows
+        card.style.transform = 'translate3d(' + (Math.sin(rad) * rx).toFixed(2) + 'px,' + ((c - 1) * cw * 0.15).toFixed(2) + 'px,' + ((c - 1) * rz).toFixed(2) + 'px) rotateY(' + (Math.sin(rad) * 38).toFixed(2) + 'deg)';
+        card.style.zIndex = String(Math.round(d * 100));
+        card.style.opacity = (0.3 + 0.7 * d * d).toFixed(3);
+        card.style.setProperty('--d', d.toFixed(3));
+      });
+      const front = ((Math.round(angle / step) % n) + n) % n;
+      if (front !== active) {
+        if (active >= 0) cards[active].classList.remove('is-front');
+        active = front;
+        cards[active].classList.add('is-front');
+        now.textContent = p(active);
+      }
+    };
+    // Glide the shortest way round to card i, ease in and out, then rest a moment before cruising on
+    const goTo = (i) => {
+      let d = (i - active) % n;
+      if (d > n / 2) d -= n; else if (d < -n / 2) d += n;
+      const to = (Math.round(angle / step) + d) * step;
+      if (reducedMotion) { angle = to; render(); return; }
+      glide = { from: angle, to, t0: performance.now() };
+      vel = 0;
+      wake();
+    };
+    const frame = (t) => {
+      raf = 0;
+      const dt = Math.min((t - last) / 1000, 0.05); last = t;
+      if (glide) {
+        const k = Math.min(1, (t - glide.t0) / GLIDE_MS);
+        angle = glide.from + (glide.to - glide.from) * ease(k);
+        if (k === 1) { glide = null; holdUntil = t + HOLD_MS; }
+      } else if (!drag) {
+        // Speed drifts towards the cruise (or to rest under the mouse / just after a glide), so it never jerks
+        const want = hover || t < holdUntil ? 0 : CRUISE;
+        vel += (want - vel) * Math.min(1, dt * (Math.abs(vel) > Math.abs(want) ? 1.6 : 0.9));
+        angle += vel * dt;
+      }
+      render();
+      if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+    };
+    const wake = () => {
+      if (raf) return;
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    };
+
+    stage.addEventListener('pointerdown', (e) => {
+      if (e.button) return;
+      drag = { x: e.clientX, start: angle, lastX: e.clientX, lastT: e.timeStamp, v: 0 };
+      dragged = false;
+    });
+    addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!dragged && Math.abs(dx) > 8) {
+        dragged = true; glide = null; drag.x = e.clientX; drag.start = angle;
+        stage.classList.add('is-dragging');
+      }
+      if (!dragged) return;
+      const dt = e.timeStamp - drag.lastT;
+      // Smoothed pointer speed (degrees per second) for the momentum on release
+      if (dt > 0) drag.v = drag.v * 0.6 + (-(e.clientX - drag.lastX) / dt * 1000 * step / (cw * 0.9)) * 0.4;
+      drag.lastX = e.clientX; drag.lastT = e.timeStamp;
+      angle = drag.start - (e.clientX - drag.x) * step / (cw * 0.9);
+      wake();
+    });
+    const release = (e) => {
+      if (!drag) return;
+      if (dragged) {
+        // A pause before letting go means no flick
+        vel = e.timeStamp - drag.lastT > 80 ? 0 : Math.max(-420, Math.min(420, drag.v));
+        holdUntil = 0;
+      }
+      drag = null;
+      stage.classList.remove('is-dragging');
+      wake();
+    };
+    addEventListener('pointerup', release);
+    addEventListener('pointercancel', release);
+    // Runs before the lightbox: a drag never opens a photo, and a side photo first glides to the front
+    stage.addEventListener('click', (e) => {
+      const card = e.target.closest('.wed-ring-card');
+      if (dragged) { dragged = false; e.stopPropagation(); return; }
+      const i = cards.indexOf(card);
+      if (card && i !== active) { e.stopPropagation(); goTo(i); }
+    }, true);
+    stage.addEventListener('focusin', (e) => {
+      const i = cards.indexOf(e.target.closest('.wed-ring-card'));
+      if (i >= 0 && i !== active) goTo(i);
+    });
+    stage.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+    stage.addEventListener('pointerleave', () => { hover = false; });
+    for (const b of $$('.wed-ring-btn', ring)) b.addEventListener('click', () => goTo(active + Number(b.getAttribute('data-dir'))));
+    ring.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goTo(active - 1);
+      else if (e.key === 'ArrowRight') goTo(active + 1);
+    });
+
+    // Only turn while the album is on screen
+    new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+      if (visible) wake();
+    }).observe(stage);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) wake(); });
+    addEventListener('resize', () => { measure(); render(); }, { passive: true });
+    measure();
+    render();
   }
 
   /* ===== Countdown ===== */
@@ -477,110 +640,6 @@
     });
   }
 
-  /* ===== RSVP ===== */
-  function initRsvp() {
-    const form = $('#rsvp-form'), sent = $('#rsvp-sent'), error = $('#rsvp-error');
-    if (!form || !sent) return;
-    const submitBtn = $('[type="submit"]', form);
-    const eventsField = $('#rsvp-events');
-    const eventBoxes = $$('[name="events"]', form);
-
-    const validateEvents = () => {
-      const ok = eventBoxes.some((el) => el.checked);
-      setFieldError(eventsField, ok ? '' : 'Bạn vui lòng chọn ít nhất một buổi tham dự.');
-      return ok;
-    };
-    const read = (attending) => ({
-      guestId: guestId(),
-      name: form.elements.name.value.trim(),
-      side: form.elements.side.value,
-      events: attending ? eventBoxes.filter((el) => el.checked).map((el) => el.value) : [],
-      guests: attending ? Number(form.elements.guests.value) : 0,
-      note: form.elements.note.value.trim(),
-      attending
-    });
-    const fill = (data) => {
-      form.elements.name.value = data.name || '';
-      form.elements.side.value = data.side || 'groom';
-      form.elements.note.value = data.note || '';
-      if (data.attending) {
-        eventBoxes.forEach((el) => { el.checked = (data.events || []).includes(el.value); });
-        form.elements.guests.value = String(data.guests || 1);
-      }
-    };
-    const showSent = (data) => {
-      $('#rsvp-sent-kicker').textContent = data.attending ? 'Hẹn gặp bạn' : 'Đã ghi nhận';
-      $('#rsvp-sent-name').textContent = data.name || 'bạn';
-      $('#rsvp-sent-body').textContent = data.attending
-        ? 'Hai gia đình đã ghi nhận phản hồi của bạn. Hẹn gặp bạn trong ngày vui!'
-        : 'Hai gia đình rất tiếc vì bạn không đến được, nhưng vẫn cảm ơn bạn đã gửi lời chúc. Mong gặp bạn vào một dịp gần nhất!';
-      form.hidden = true;
-      sent.hidden = false;
-    };
-    const respond = async (attending) => {
-      // Declining only needs a name; attending also needs at least one event.
-      const nameOk = validateName(form.elements.name);
-      const eventsOk = attending ? validateEvents() : (setFieldError(eventsField, ''), true);
-      if (!nameOk || !eventsOk) {
-        const first = $('.has-error .input, .has-error input', form);
-        if (first) first.focus();
-        return;
-      }
-      const firstTime = !store.get('phw-rsvp');
-      const data = read(attending);
-      error.hidden = true;
-      const done = busy(submitBtn, 'Đang gửi…');
-      try {
-        await api.send({
-          type: 'rsvp',
-          guestId: data.guestId,
-          name: data.name,
-          side: data.side,
-          attending: attending ? 'yes' : 'no',
-          guests: String(data.guests),
-          events: data.events.join(', '),
-          note: data.note,
-          website: form.elements.website.value,
-          firstTime: firstTime ? '1' : ''
-        });
-        store.set('phw-rsvp', JSON.stringify(data));
-        showSent(data);
-        // The backend copies a first-time note into the guestbook, so show it right away.
-        if (firstTime && data.note) {
-          document.dispatchEvent(new CustomEvent('phw:wish', { detail: {
-            name: data.name,
-            relation: data.side === 'bride' ? 'Khách nhà gái' : 'Khách nhà trai',
-            message: data.note
-          } }));
-        }
-      } catch (e) {
-        error.hidden = false;
-      } finally {
-        done();
-      }
-    };
-
-    form.addEventListener('submit', (e) => { e.preventDefault(); respond(true); });
-    $('#rsvp-decline').addEventListener('click', () => respond(false));
-    $('#rsvp-reset').addEventListener('click', () => {
-      sent.hidden = true;
-      form.hidden = false;
-    });
-    // Errors clear as soon as the guest fixes the field
-    form.elements.name.addEventListener('input', () => {
-      if (form.elements.name.closest('.field').classList.contains('has-error')) validateName(form.elements.name);
-    });
-    eventsField.addEventListener('change', () => {
-      if (eventsField.classList.contains('has-error')) validateEvents();
-    });
-
-    // A returning guest sees the answer they already sent
-    try {
-      const saved = JSON.parse(store.get('phw-rsvp'));
-      if (saved) { fill(saved); showSent(saved); }
-    } catch (e) { store.del('phw-rsvp'); }
-  }
-
   /* ===== Guestbook: wishes are loaded from and saved to the backend =====
    * One wish shows at a time; it slides to the next every few seconds, and arrows either
    * side page by hand. The strip is a native scroller (swipe, wheel and keyboard all work);
@@ -746,7 +805,7 @@
       if (messageField.classList.contains('has-error')) validateMessage();
     });
 
-    // Guests who already sent an RSVP don't have to type their name again
+    // Guests who sent an RSVP on an earlier version of the page don't have to type their name again
     try {
       const saved = JSON.parse(store.get('phw-rsvp'));
       if (saved && saved.name) form.elements.name.value = saved.name;
@@ -1103,15 +1162,46 @@
       intro.classList.add('is-opening');
       // The words fade, the curtains slide out and fade together (.3s delay + 1.7s); the hero rises meanwhile
       setTimeout(() => root.classList.add('intro-reveal'), 350);
-      setTimeout(() => root.classList.remove('intro-on', 'intro-reveal'), 2200);
+      setTimeout(() => { root.classList.remove('intro-on', 'intro-reveal'); autoScroll.start(); }, 2200);
     };
     button.addEventListener('click', () => open(true));
     quiet.addEventListener('click', () => open(false));
   }
 
-  /* ===== Floating RSVP pill (computers): shown after the hero, hidden while the RSVP form is on screen ===== */
+  /* ===== Auto-scroll: once the invitation is open the page glides down on its own.
+     Any wheel, touch, click or key from the guest hands control back for good. ===== */
+  function initAutoScroll() {
+    const speed = Number(cfg.autoScroll) || 0; // px per second
+    let started = false, stopped = !speed || reducedMotion, last = 0, carry = 0;
+    // Taps on the curtains (the "Mở thiệp" button itself) don't count: the page is locked while they are up
+    const stop = () => { if (!root.classList.contains('intro-on')) stopped = true; };
+    for (const type of ['wheel', 'touchstart', 'pointerdown', 'keydown']) addEventListener(type, stop, { passive: true });
+    const step = (now) => {
+      if (stopped) return;
+      // A background tab pauses requestAnimationFrame; don't jump ahead when the guest comes back
+      carry += speed * Math.min(now - last, 100) / 1000;
+      last = now;
+      const px = Math.floor(carry);
+      if (px) {
+        carry -= px;
+        const before = scrollY;
+        scrollBy({ top: px, behavior: 'instant' });
+        if (scrollY === before && innerHeight + scrollY >= document.documentElement.scrollHeight - 1) return stop();
+      }
+      requestAnimationFrame(step);
+    };
+    return {
+      start() {
+        if (started || stopped) return;
+        started = true;
+        requestAnimationFrame((now) => { last = now; requestAnimationFrame(step); });
+      }
+    };
+  }
+
+  /* ===== Floating pill ("Gửi lời chúc" · "Chỉ đường"): shown after the hero, hidden while the wish form is on screen ===== */
   function initActionBar() {
-    const bar = $('.wed-bar'), form = $('#xac-nhan');
+    const bar = $('.wed-bar'), form = $('#wish-form');
     if (!bar || !form) return;
     let formInView = false;
     // is-away: computers hide the pill near the top and over the form; in-form: phones hide it only over the form
@@ -1129,18 +1219,23 @@
   }
 
   initThemes();
+  const autoScroll = initAutoScroll();
   initIntro();
+  // Without the curtains (seen earlier this session, or ?intro=0) the glide starts shortly after load,
+  // unless the guest arrived on a link to a section
+  if (!root.classList.contains('intro-on') && !location.hash) setTimeout(() => autoScroll.start(), 1500);
   initActionBar();
   initSections();
+  initAlbum();
   initPhotos();
   initMaps();
   initMapEmbeds();
+  initRing();
   initGift();
   initPopovers();
   initPresets();
   initCountdown();
   initReveal();
-  initRsvp();
   initGuestbook();
   atm = initAtmosphere();
 })();

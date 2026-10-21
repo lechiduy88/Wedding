@@ -1,4 +1,4 @@
-/* Việt Phương & Ninh Hương wedding invitation — page styles.
+/* Hoài Nam & Hà Lâm wedding invitation — page styles.
    Base tokens and components live in classical.css; this file adds the themes and the layout. */
 
 /* Five palettes. Each one only declares the semantic --wed-* variables, which are then
@@ -104,7 +104,6 @@ a{color:var(--color-accent-700);text-decoration:none}
 a:hover{color:var(--color-accent-600);text-decoration:underline;text-underline-offset:3px}
 a.btn,a.btn:hover{text-decoration:none}
 h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
-section[id]{scroll-margin-top:72px}
 
 /* Design-system component overrides that suit the paper-like background */
 .input,.input::placeholder,textarea.input{color:var(--color-text)}
@@ -141,7 +140,6 @@ section[id]{scroll-margin-top:72px}
 
 /* ===== Shared blocks ===== */
 .wed-wrap{max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,88px) var(--wed-gutter)}
-.wed-wrap--story{max-width:1100px}
 .wed-band{border-top:1px solid var(--color-divider)}
 .wed-band--both{border-bottom:1px solid var(--color-divider)}
 .wed-kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700);margin:0 0 14px}
@@ -162,6 +160,8 @@ section[id]{scroll-margin-top:72px}
 .wed-slot img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
 .wed-slot-cap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:13px;line-height:1.3;font-weight:500;letter-spacing:.01em;color:color-mix(in srgb,currentColor 75%,transparent);border:1.5px dashed color-mix(in srgb,currentColor 35%,transparent)}
 .wed-slot.is-filled .wed-slot-cap{display:none}
+/* While the right file extension is still being tried, never show a broken-image icon */
+.wed-slot:not(.is-filled) img{visibility:hidden}
 .wed-slot--qr{width:clamp(150px,18vw,184px);height:auto;flex:none;border-radius:4px}
 .wed-slot--qr .wed-slot-cap{border-radius:4px}
 .wed-slot--qr img{object-fit:contain}
@@ -172,13 +172,6 @@ section[id]{scroll-margin-top:72px}
 @media (prefers-reduced-motion:reduce){.js .wed-reveal,.js .wed-reveal.wed-in{opacity:1;transform:none;transition:none}}
 @keyframes vpnh-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ===== Navigation ===== */
-.wed-nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--color-bg) 92%,transparent);backdrop-filter:blur(8px);gap:clamp(12px,2.5vw,28px);padding:12px var(--wed-gutter)}
-.wed-nav .nav-brand{font-size:19px;letter-spacing:.02em;white-space:nowrap}
-.wed-nav-links{display:flex;align-items:center;gap:clamp(14px,2.2vw,26px)}
-.wed-nav-links a{font-size:13.5px;letter-spacing:.04em;color:var(--color-text);white-space:nowrap}
-.wed-menu{display:none}
-.wed-menu summary{min-height:44px;padding-inline:16px}
 
 /* Popover built on <details>: the mobile nav menu and the "add to calendar" menus */
 .wed-pop{position:relative}
@@ -235,7 +228,7 @@ section[id]{scroll-margin-top:72px}
 .wed-hero-actions .btn-secondary{min-height:50px}
 @media (max-width:820px){
   /* Phones: the photo fills the first screen and the names sit on it, so the invitation reads at a glance */
-  .wed-hero{display:block;max-width:none;padding:0;min-height:calc(100svh - 68px);overflow:hidden;isolation:isolate}
+  .wed-hero{display:block;max-width:none;padding:0;min-height:100svh;overflow:hidden;isolation:isolate}
   .wed-hero-photo{position:absolute;inset:0;max-width:none;width:auto;aspect-ratio:auto;justify-self:stretch;z-index:-1}
   .wed-hero-photo::before{display:none}
   .wed-hero-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,color-mix(in srgb,var(--wed-primary-deep) 94%,transparent) 0,color-mix(in srgb,var(--wed-primary-deep) 78%,transparent) 30%,color-mix(in srgb,var(--wed-primary-deep) 18%,transparent) 62%,transparent 80%)}
@@ -244,7 +237,7 @@ section[id]{scroll-margin-top:72px}
   /* the photo is larger and anchored at the bottom, so the couple's faces sit in the top part of the screen
      (above the names) on short browser windows such as Safari with its toolbars, with no gap at the bottom */
   .wed-hero-frame .wed-slot img{--sc:1.3;transform-origin:50% 100%;object-position:50% 0%}
-  .wed-hero-text{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:calc(100svh - 68px);max-width:none;padding:0 clamp(26px,7vw,48px) 112px;color:var(--wed-dark-ink)}
+  .wed-hero-text{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:100svh;max-width:none;padding:0 clamp(26px,7vw,48px) 112px;color:var(--wed-dark-ink)}
   .wed-hero-text .wed-name{font-size:min(19cqw,84px,8.6svh);text-shadow:0 2px 24px rgba(40,8,18,.55)}
   .wed-hero-text .wed-amp{color:var(--wed-dark-gold)}
   .wed-hero-kicker{color:var(--wed-dark-gold);margin-bottom:10px;text-shadow:0 1px 8px rgba(30,6,14,.55)}
@@ -314,42 +307,6 @@ section[id]{scroll-margin-top:72px}
 .wed-parents dt{color:color-mix(in srgb,var(--color-text) 55%,transparent)}
 .wed-parents dd{margin:0}
 
-/* ===== Our story ===== */
-.wed-story{--story-gap:clamp(34px,5vw,64px);position:relative;display:grid;gap:var(--story-gap)}
-.wed-story::before{display:none;content:"";position:absolute;left:50%;top:6px;bottom:6px;width:1px;background:linear-gradient(to bottom,transparent,var(--color-divider) 8%,var(--color-divider) 92%,transparent)}
-.wed-story-row{position:relative;display:grid;grid-template-columns:1fr 64px 1fr;align-items:center}
-.wed-story-row::before{content:"";position:absolute;left:50%;top:calc(var(--story-gap) / -2);bottom:calc(var(--story-gap) / -2);width:1px;background:var(--color-divider);pointer-events:none}
-.wed-story-row > .wed-story-pics{grid-column:1}
-.wed-story-pics{display:grid;gap:clamp(8px,1.4vw,14px)}
-.wed-story-pics > figure{margin:0;min-width:0;min-height:0}
-.wed-story-pics .wed-slot{aspect-ratio:3/4}
-.wed-story-pics .wed-slot img{object-position:var(--op,50% 35%)}
-.wed-story-pics--1{grid-template-columns:1fr;max-width:min(100%,340px)}
-.wed-story-pics--2{grid-template-columns:1fr 1fr;align-items:start}
-.wed-story-pics--2 > figure:nth-child(2){margin-top:clamp(20px,4vw,48px)}
-.wed-story-pics--3{grid-template-columns:3fr 2fr;grid-template-rows:1fr 1fr;aspect-ratio:5/4}
-.wed-story-pics--3 > figure{height:100%}
-.wed-story-pics--3 > figure:first-child{grid-row:1/3}
-.wed-story-pics--3 .wed-slot{height:100%;aspect-ratio:auto}
-.wed-story-pics--4{grid-template-columns:1fr 1fr;align-items:start}
-.wed-story-pics--4 .wed-slot{aspect-ratio:1/1}
-.wed-story-pics--4 > figure:nth-child(even){margin-top:clamp(14px,2.4vw,28px)}
-.wed-story-text{grid-column:3;text-align:left}
-.wed-story-alt > .wed-story-pics{grid-column:3}
-.wed-story-alt .wed-story-text{grid-column:1;text-align:right}
-.wed-story-row > .wed-story-pics,.wed-story-text{grid-row:1}
-.wed-story-row::after{content:"";grid-column:2;grid-row:1;justify-self:center;width:9px;height:9px;transform:rotate(45deg);background:var(--color-bg);border:1px solid var(--color-accent-2);box-shadow:0 0 0 5px var(--color-bg)}
-.wed-story-row--wide{align-items:start;row-gap:clamp(18px,3vw,30px)}
-.wed-story-row--wide::after{align-self:center}
-.wed-story-sides{display:contents}
-.wed-story-row--wide > .wed-story-text{grid-column:3;grid-row:1;text-align:left;align-self:center}
-.wed-story-row--wide .wed-story-sides > .wed-story-pics:nth-child(1){grid-column:1;grid-row:2}
-.wed-story-row--wide .wed-story-sides > .wed-story-pics:nth-child(2){grid-column:3;grid-row:2}
-.wed-story-year{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-feature-settings:'tnum' 1;color:var(--color-accent-700);margin:0 0 10px}
-.wed-story-title{font-family:var(--font-heading);font-weight:400;font-size:clamp(24px,2.4vw,32px);line-height:1.2;margin:0 0 10px}
-.wed-story-body{font-size:15.5px;line-height:1.75;color:var(--wed-soft);margin:0;max-width:40ch}
-.wed-story-alt .wed-story-body{margin-left:auto}
-
 /* ===== Schedule ===== */
 .wed-tl-row{display:grid;grid-template-columns:minmax(120px,168px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:start;padding:clamp(22px,3vw,34px) 0;border-top:1px solid var(--color-divider)}
 .wed-tl-row:last-child{border-bottom:1px solid var(--color-divider)}
@@ -371,75 +328,47 @@ section[id]{scroll-margin-top:72px}
 .wed-act--cal:hover,.wed-cal[open] .wed-act--cal{background:color-mix(in srgb,var(--wed-accent) 30%,transparent);transform:translateY(-1px)}
 .wed-tl-actions{gap:10px}
 
-/* ===== Album =====
-   Laid out by the file names in assets/photos_beauti: hang_<row>_<column>. The first row is one wide
-   photo; every other row is three portraits. On phones: two columns, the third photo of a row spans the full width. */
-.wed-album{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,2vw,26px);align-items:start}
-.wed-album > figure{margin:0}
-.wed-album > .wed-wide,.wed-album > figure:nth-child(3n+1){grid-column:1 / -1}
-@media (min-width:640px){
-  .wed-album{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .wed-album > figure:nth-child(3n+1){grid-column:auto}
-  .wed-album > figure.wed-wide{grid-column:1 / -1}
-}
+/* ===== Album: the photos stand on a slowly turning ring (initRing in wedding.js) =====
+   Each card gets its place from JS: --d is its depth, 1 at the front and 0 at the back. */
+.wed-ring{--cw:clamp(168px,44vw,268px);position:relative;max-width:1100px;margin:0 auto}
+.wed-ring-stage{position:relative;height:calc(var(--cw) * 1.8 + clamp(54px,8vw,94px));perspective:1500px;perspective-origin:50% 30%;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+.wed-ring-stage.is-dragging{cursor:grabbing}
+.wed-ring-floor{position:absolute;left:50%;bottom:4px;width:min(94%,920px);height:clamp(56px,9vw,112px);transform:translateX(-50%);border-radius:50%;border:1px solid color-mix(in srgb,var(--wed-accent) 55%,transparent);background:radial-gradient(closest-side,color-mix(in srgb,var(--wed-accent) 24%,transparent),transparent);pointer-events:none}
+.wed-ring-floor::before{content:"";position:absolute;inset:16% 12%;border-radius:50%;border:1px dashed color-mix(in srgb,var(--wed-accent) 38%,transparent)}
+.wed-ring-card{position:absolute;left:50%;top:calc(var(--cw) * .3);width:var(--cw);margin:0 0 0 calc(var(--cw) / -2);padding:7px;background:var(--wed-background);border:1px solid color-mix(in srgb,var(--wed-accent) 60%,transparent);box-shadow:0 18px 40px -20px color-mix(in srgb,var(--wed-primary-deep) 60%,transparent);will-change:transform;transition:box-shadow .5s ease,border-color .5s ease}
+.wed-ring-card::after{content:"";position:absolute;inset:3px;border:1px solid color-mix(in srgb,var(--wed-accent) 30%,transparent);pointer-events:none}
+.wed-ring-card .wed-slot{aspect-ratio:2/3}
+.wed-ring-card .wed-slot img{object-position:50% 30%}
+/* Cards further back sink into a soft veil of the theme's deep colour */
+.wed-ring-card .wed-slot::before{content:"";position:absolute;inset:0;z-index:1;background:var(--wed-primary-deep);opacity:calc((1 - var(--d,1)) * .55);pointer-events:none}
+.wed-ring-card.is-front{border-color:var(--wed-accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--wed-accent) 18%,transparent),0 26px 56px -18px color-mix(in srgb,var(--wed-primary-deep) 70%,transparent)}
+.wed-ring-ctrl{display:flex;align-items:center;justify-content:center;gap:clamp(18px,4vw,34px);margin-top:clamp(14px,2.5vw,26px)}
+.wed-ring-btn{display:grid;place-items:center;width:46px;height:46px;padding:0;border-radius:50%;border:1px solid color-mix(in srgb,var(--wed-accent) 70%,transparent);background:transparent;color:var(--wed-primary-deep);cursor:pointer;transition:background-color .3s ease,color .3s ease,transform .3s ease}
+.wed-ring-btn:hover{background:var(--wed-primary);border-color:var(--wed-primary);color:var(--wed-background);transform:translateY(-1px)}
+.wed-ring-btn:focus-visible,.wed-ring-card .wed-slot:focus-visible{outline:2px solid var(--wed-accent);outline-offset:3px}
+.wed-ring-count{display:flex;align-items:center;gap:14px;margin:0;font-family:var(--font-heading);font-size:clamp(20px,2.4vw,26px);letter-spacing:.12em;font-feature-settings:'tnum' 1;color:var(--wed-primary-deep)}
+.wed-ring-count i{position:relative;width:38px;height:1px;background:var(--wed-accent)}
+.wed-ring-count i::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;transform:translate(-50%,-50%) rotate(45deg);background:var(--wed-accent)}
+.wed-ring-total{color:color-mix(in srgb,var(--wed-primary-deep) 55%,transparent)}
+.wed-ring-hint{margin:12px 0 0;text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 55%,transparent)}
 
-/* ===== Quote ===== */
-.wed-quote{max-width:1200px;margin:0 auto;padding:clamp(44px,6vw,80px) var(--wed-gutter)}
-.wed-quote blockquote{font-family:var(--font-heading);font-weight:400;font-size:clamp(24px,3vw,38px);line-height:1.35;letter-spacing:-.005em;max-width:38ch;margin:0 auto;text-align:center}
-.wed-quote figcaption{font-size:15.5px;line-height:1.7;color:color-mix(in srgb,var(--color-text) 65%,transparent);margin:clamp(24px,3vw,40px) 0 0;text-align:center}
-
-/* ===== RSVP ===== */
-/* RSVP: heading centred above a wide form laid out in two columns, so it reads across rather than down */
-.wed-rsvp{display:grid;gap:clamp(28px,4vw,44px);max-width:calc(1040px + 2 * var(--wed-gutter))}
-.wed-rsvp-head{text-align:center}
-.wed-rsvp .wed-title{margin-bottom:14px}
-.wed-rsvp .wed-lead{max-width:52ch;margin:0 auto;font-size:17px}
+/* ===== Forms ===== */
 .wed-form{border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:clamp(22px,3vw,36px);display:grid;gap:22px;align-content:start;font-size:16px}
 .wed-form .input{font-size:16px;min-height:46px}
-.wed-form .radio,.wed-form .seg-opt{font-size:16px}
-.wed-form--rsvp{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"name side" "events guests" "events note" "actions actions";column-gap:clamp(24px,3.5vw,44px);row-gap:22px}
-.wed-form--rsvp .f-name{grid-area:name}
-.wed-form--rsvp .f-side{grid-area:side}
-.wed-form--rsvp .f-events{grid-area:events}
-.wed-form--rsvp .f-guests{grid-area:guests}
-.wed-form--rsvp .f-note{grid-area:note}
-.wed-form--rsvp .wed-form-actions{grid-area:actions;justify-self:center;width:min(100%,420px)}
-@media (max-width:760px){
-  .wed-form--rsvp{grid-template-columns:minmax(0,1fr);grid-template-areas:"name" "side" "events" "guests" "note" "actions"}
-}
 .wed-flabel{display:block;margin-bottom:9px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 62%,transparent)}
-.wed-events{display:grid;gap:18px;margin-top:2px}
-/* Events are grouped by family: Nhà trai (reception + wedding) and Nhà gái (reception + vu quy) */
-.wed-ev-group{display:grid;gap:12px;padding:16px 18px 18px;border:1px solid var(--color-divider);border-radius:var(--radius-md);background:color-mix(in srgb,var(--color-surface) 38%,transparent)}
-.wed-ev-title{margin:0 0 2px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-700);display:flex;align-items:center;gap:12px}
-.wed-ev-title::after{content:"";flex:1;height:1px;background:var(--color-divider)}
-.wed-box{width:16px;height:16px;flex:none;border:1.5px solid var(--color-divider);border-radius:var(--radius-sm);display:inline-block;position:relative}
-.radio:hover .wed-box{border-color:var(--color-accent)}
-.radio input:checked + .wed-box{border-color:var(--color-accent);background:var(--color-accent);box-shadow:inset 0 0 0 2px var(--color-bg)}
-.radio input:focus-visible + .wed-box{outline:2px solid var(--color-accent);outline-offset:2px}
 .wed-form textarea.input{min-height:84px}
 .wed-form-actions{display:grid;gap:12px;margin-top:2px}
-/* Confirm button: filled with the primary colour — the single strong accent on the page.
-   .btn.wed-cta outranks ".nav a", so the nav CTA keeps these colours too. */
+/* Main button: filled with the primary colour — the single strong accent on the page. */
 .btn.wed-cta{background:var(--wed-primary);border-color:var(--wed-primary);color:var(--wed-background);padding-inline:28px;min-height:50px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;box-shadow:0 10px 28px -12px color-mix(in srgb,var(--wed-primary) 70%,transparent);transition:background-color .3s ease,transform .3s ease,box-shadow .3s ease}
 .btn.wed-cta:hover{background:var(--wed-primary-deep);border-color:var(--wed-primary-deep);color:var(--wed-background);transform:translateY(-1px);box-shadow:0 0 0 4px color-mix(in srgb,var(--wed-accent) 26%,transparent)}
-.btn.wed-nav-cta.wed-cta{min-height:40px;font-size:12.5px;padding-inline:18px;box-shadow:none}
-.wed-decline{justify-self:center;font-size:13.5px;color:color-mix(in srgb,var(--color-text) 62%,transparent);text-decoration:underline;text-underline-offset:3px;min-height:40px}
-.wed-decline:hover{color:var(--color-accent-700);background:transparent}
 .wed-form-error,.wed-form-note{font-size:13.5px;line-height:1.6;color:var(--color-accent-700);margin:0;text-align:center}
 .wed-field-error{font-size:13px;line-height:1.5;color:var(--wed-danger);margin:6px 0 0}
 .field.has-error .input{border-color:var(--wed-danger)}
-.field.has-error .wed-box{border-color:var(--wed-danger)}
 .wed-optional{text-transform:none;letter-spacing:.02em;opacity:.8}
-.wed-guests{width:auto;min-width:132px}
 .wed-presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
 .wed-presets:empty{display:none}
 /* Honeypot for bots: off-screen rather than display:none, which some bots skip */
 .wed-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-.wed-sent{border:1px solid var(--color-accent);border-radius:var(--radius-md);padding:clamp(26px,4vw,44px);animation:vpnh-rise .5s ease both;align-self:start;text-align:center}
-.wed-sent .wed-label{color:var(--color-accent-700);margin-bottom:16px}
-.wed-sent h3{font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,3vw,36px);line-height:1.15;margin:0 0 12px}
-.wed-sent .wed-lead{margin:0 auto 20px;max-width:46ch}
 
 /* ===== Gift box ===== */
 .wed-gift .wed-title{margin-bottom:12px}
@@ -498,13 +427,12 @@ section[id]{scroll-margin-top:72px}
 .wed-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;gap:10px;padding:10px 16px;background:color-mix(in srgb,var(--color-bg) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--color-divider)}
 .wed-bar .btn{flex:1;min-height:46px}
 .wed-bar .btn.wed-cta{min-height:50px}
-/* Big RSVP call to action on computers: larger buttons, a pulsing ring, and a floating pill at the bottom of the
-   screen that appears once the guest scrolls past the hero and steps aside when the RSVP form is in view. */
+/* Big call to action on computers: larger buttons, a pulsing ring, and a floating pill at the bottom of the
+   screen that appears once the guest scrolls past the hero and steps aside when the wish form is in view. */
 @keyframes wed-cta-glow{
   0%,100%{box-shadow:0 12px 30px -12px color-mix(in srgb,var(--wed-primary) 75%,transparent),0 0 0 0 color-mix(in srgb,var(--wed-accent) 55%,transparent)}
   60%{box-shadow:0 12px 30px -12px color-mix(in srgb,var(--wed-primary) 75%,transparent),0 0 0 16px color-mix(in srgb,var(--wed-accent) 0%,transparent)}}
 @media (min-width:861px){
-  .btn.wed-nav-cta.wed-cta{min-height:46px;font-size:13.5px;padding-inline:22px}
   .wed-hero-actions{gap:16px;margin-top:34px}
   .wed-hero-actions .btn.wed-cta{min-height:66px;padding-inline:52px;font-size:18px;letter-spacing:.1em;animation:wed-cta-glow 2.6s ease-in-out infinite}
   .wed-hero-actions .btn-secondary{min-height:66px;padding-inline:32px;font-size:16px}
@@ -515,7 +443,7 @@ section[id]{scroll-margin-top:72px}
   .wed-bar .btn.wed-cta{min-height:66px;padding-inline:54px;font-size:18px;letter-spacing:.1em;animation:wed-cta-glow 2.6s ease-in-out infinite}
   .wed-bar.is-away{opacity:0;pointer-events:none;transform:translate(-50%,22px)}
 }
-/* Phones: the same rounded floating pill with a pulsing ring, hidden only while the RSVP form is on screen */
+/* Phones: the same rounded floating pill with a pulsing ring, hidden only while the wish form is on screen */
 @media (max-width:600px){
   .wed-bar{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));padding:6px;gap:8px;border:1px solid color-mix(in srgb,var(--wed-accent) 55%,transparent);border-radius:999px;box-shadow:0 16px 36px -14px color-mix(in srgb,var(--wed-primary-deep) 55%,transparent);transition:opacity .4s ease,transform .4s ease}
   .wed-bar .btn{border-radius:999px;min-height:46px}
@@ -532,8 +460,7 @@ section[id]{scroll-margin-top:72px}
 
 /* ===== "truyen-thong" theme: red takes the lead — headings, buttons, countdown band, footer ===== */
 [data-wed-theme="truyen-thong"]{--wed-ivory:#f9f3e7}
-[data-wed-theme="truyen-thong"] h1,[data-wed-theme="truyen-thong"] h2,[data-wed-theme="truyen-thong"] h3,[data-wed-theme="truyen-thong"] blockquote,[data-wed-theme="truyen-thong"] .nav-brand{color:var(--wed-primary-deep)}
-[data-wed-theme="truyen-thong"] .nav{border-top:3px solid var(--wed-primary);border-bottom:1px solid var(--wed-secondary)}
+[data-wed-theme="truyen-thong"] h1,[data-wed-theme="truyen-thong"] h2,[data-wed-theme="truyen-thong"] h3,[data-wed-theme="truyen-thong"] blockquote{color:var(--wed-primary-deep)}
 [data-wed-theme="truyen-thong"] .wed-theme-strip{border-bottom-color:var(--wed-secondary)}
 [data-wed-theme="truyen-thong"] footer{border-top:2px solid var(--wed-primary)}
 [data-wed-theme="truyen-thong"] .btn-primary{background:var(--wed-primary);border-color:var(--wed-primary);color:var(--wed-ivory)}
@@ -543,7 +470,6 @@ section[id]{scroll-margin-top:72px}
 
 /* ===== Deep bands: give the page a light / dark rhythm ===== */
 .wed-dark{position:relative;color:var(--wed-dark-ink);border-color:transparent;background:radial-gradient(120% 170% at 50% -30%,color-mix(in srgb,var(--wed-primary) 78%,var(--wed-primary-deep)),var(--wed-primary-deep) 58%,color-mix(in srgb,var(--wed-primary-deep) 66%,#000))}
-.wed-dark--photo{background:linear-gradient(180deg,color-mix(in srgb,var(--wed-primary-deep) 94%,transparent),color-mix(in srgb,var(--wed-primary-deep) 88%,transparent)),url("../assets/photos/quote-bg.webp") center 62%/cover}
 .wed-dark .wed-kicker,.wed-dark .wed-cd-kicker{color:var(--wed-dark-gold)}
 .wed-dark .wed-cd-rule{background:linear-gradient(to right,transparent,var(--wed-dark-gold))}
 .wed-dark .wed-cd-kicker > .wed-cd-rule:last-child{background:linear-gradient(to left,transparent,var(--wed-dark-gold))}
@@ -554,9 +480,6 @@ section[id]{scroll-margin-top:72px}
 .wed-dark .wed-cd{border-color:color-mix(in srgb,var(--wed-dark-gold) 34%,transparent)}
 .wed-dark .wed-cd-cell + .wed-cd-cell::before{background:color-mix(in srgb,var(--wed-dark-gold) 30%,transparent)}
 .wed-dark .wed-cd-cell + .wed-cd-cell::after{background:var(--wed-dark-gold);opacity:.9}
-.wed-dark .wed-quote blockquote{color:var(--wed-dark-ink)}
-.wed-dark .wed-quote figcaption{color:color-mix(in srgb,var(--wed-dark-ink) 78%,transparent)}
-.wed-quote::before{content:"“";display:block;text-align:center;font-family:var(--font-heading);font-size:clamp(84px,10vw,130px);line-height:.6;height:.5em;color:var(--wed-dark-gold);opacity:.8;margin-bottom:clamp(10px,2vw,22px)}
 .wed-footer.wed-dark{border-top:0}
 .wed-footer.wed-dark::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,var(--wed-dark-gold),transparent);opacity:.7}
 .wed-footer .wed-name{color:var(--wed-dark-ink)}
@@ -567,11 +490,7 @@ section[id]{scroll-margin-top:72px}
 
 /* ===== Section details ===== */
 /* Timeline diamonds light up once their row has been revealed */
-.js .wed-story-row.wed-in::after{background:var(--color-accent-2);box-shadow:0 0 0 5px var(--color-bg),0 0 16px color-mix(in srgb,var(--color-accent-2) 70%,transparent);transition:background .8s ease .35s,box-shadow .8s ease .35s}
 /* Album photos rise and settle as they come into view */
-.js .wed-album .wed-reveal{transform:translateY(22px) scale(.965)}
-.js .wed-album .wed-reveal.wed-in{transform:none}
-@media (prefers-reduced-motion:reduce){.js .wed-album .wed-reveal{transform:none}}
 /* QR codes get a white mat and a thin gold frame */
 .wed-slot--qr{background:#fff;box-shadow:0 0 0 5px var(--color-bg),0 0 0 6px var(--color-accent-2)}
 
@@ -639,30 +558,11 @@ section[id]{scroll-margin-top:72px}
 @media (max-width:600px){.wed-music{right:14px;bottom:calc(98px + env(safe-area-inset-bottom))}}
 
 /* ===== Responsive ===== */
-/* The nav collapses a little before the 860px layout breakpoint: with no-wrap links and the
-   filled CTA, the full bar no longer fits beside the brand below ~960px. */
-@media (max-width:960px){
-  .wed-nav-links,.wed-nav-cta{display:none}
-  .wed-menu{display:block}
-}
 @media (max-width:860px){
   .wed-tl-row{grid-template-columns:minmax(0,1fr);gap:14px}
   .wed-tl-actions{flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px}
   .wed-tl-actions > .wed-act,.wed-tl-actions > .wed-cal{flex:1 1 160px}
   .wed-cal .wed-pop-list{left:0;right:auto}
-}
-@media (max-width:820px){
-  .wed-story{gap:30px}
-  .wed-story::before,.wed-story-row::before,.wed-story-row::after{display:none!important}
-  .wed-story-row,.wed-story-alt{grid-template-columns:minmax(0,1fr);gap:16px}
-  .wed-story-row > .wed-story-pics,.wed-story-alt > .wed-story-pics{grid-column:1;grid-row:1}
-  /* groups with two clusters: title first, then the clusters one under the other */
-  .wed-story-row.wed-story-row--wide > .wed-story-text{grid-column:1;grid-row:1;text-align:center}
-  .wed-story-row--wide .wed-story-sides{display:grid;gap:clamp(18px,5vw,28px);grid-column:1;grid-row:2}
-  .wed-story-row--wide .wed-story-sides > .wed-story-pics:nth-child(n){grid-column:auto;grid-row:auto}
-  .wed-story-pics--1{width:min(100%,340px);justify-self:center}
-  .wed-story-text,.wed-story-alt .wed-story-text{grid-column:1;grid-row:2;text-align:center}
-  .wed-story-body,.wed-story-alt .wed-story-body{margin:0 auto}
 }
 @media (max-width:600px){
   .wed-cd-row{padding-inline:16px}

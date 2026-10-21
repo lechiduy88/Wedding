@@ -1,5 +1,5 @@
 /**
- * PhuongHuongWedding backend — Google Apps Script bound to a Google Sheet.
+ * Wedding backend — Google Apps Script bound to a Google Sheet.
  *
  * Stores RSVPs, guestbook wishes and the hidden game's leaderboard ("Bảng vàng") in three tabs of the
  * spreadsheet and serves the public wish list and leaderboard back to the website.
@@ -38,7 +38,7 @@ function doGet(e) {
   const action = (e.parameter.action || '').toLowerCase();
   if (action === 'wishes') return json({ ok: true, wishes: listWishes() });
   if (action === 'scores') return json({ ok: true, scores: listScores(e.parameter.guestId) });
-  return json({ ok: true, service: 'PhuongHuongWedding' });
+  return json({ ok: true, service: 'Wedding' });
 }
 
 function doPost(e) {

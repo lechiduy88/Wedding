@@ -1,6 +1,6 @@
-# PhuongHuongWedding
+# Wedding
 
-Online wedding invitation for **Việt Phương & Ninh Hương** — wedding ceremony on 18 · 10 · 2026.
+Online wedding invitation for **Hoài Nam & Hà Lâm** — wedding ceremony on 18 · 10 · 2026.
 
 A static HTML/CSS/JS site with no build step. RSVPs and guestbook wishes are stored in a
 Google Sheet through a small Google Apps Script. The visual design comes from the
@@ -35,13 +35,13 @@ without a backend.
 | `css/wedding.css` | The five palettes and the page layout |
 | `calendar/*.ics` | One calendar file per event (must keep CRLF line endings — see `.gitattributes`) |
 | `backend/Code.gs` | Apps Script that writes to the Google Sheet and serves the wish list |
-| `assets/photos/` | Wedding photos, QR codes, map screenshots, `share-2.jpg` (the 1200×630 link preview) |
+| `assets/photos/` | Wedding photos and QR codes under fixed names (`anh-bia`, `chu-re`, `co-dau`, `album-01`…, `qr-nha-trai`, `qr-nha-gai`, `chia-se.jpg`): see [`assets/photos/README.md`](assets/photos/README.md) |
 | `assets/audio/song.mp3` | Background music, started by the tap on the opening seal |
 
 ## Before sending the invitation
 
 1. **Backend** — follow [`backend/README.md`](backend/README.md) and paste the web app URL into `apiEndpoint`.
-2. **Photos** — put files in `assets/photos/` and set their paths under `photos` in `js/config.js`.
+2. **Photos** — put files in `assets/photos/` under the names listed in [`assets/photos/README.md`](assets/photos/README.md) (any of .jpg/.jpeg/.png/.webp) and set `albumCount` in `js/config.js`.
    Slots without a photo show a placeholder frame.
 3. **Maps** — replace `maps` with the exact pinned Google Maps links of both venues.
 4. **Gift box** — fill in `gift.groom` / `gift.bride` (bank, account number) and add the QR images.

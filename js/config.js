@@ -11,6 +11,10 @@ window.WEDDING_CONFIG = {
   intro: true,
   music: { src: 'assets/audio/song.mp3', volume: 0.55 },
 
+  // After the invitation opens, the page scrolls down by itself at this speed (px per second).
+  // It stops for good as soon as the guest scrolls, taps or presses a key. 0 turns it off.
+  autoScroll: 40,
+
   showCountdown: true,
   showGift: true,
   showGuestbook: true,
@@ -36,58 +40,17 @@ window.WEDDING_CONFIG = {
     { label: 'Vững tay chèo', text: 'Mừng ngày chung đôi! Chúc hai bạn mãi vững tay chèo trên mọi chặng đường phía trước.' }
   ],
 
-  // Photo for each slot. Put files in assets/photos/ and set the path; '' keeps the placeholder frame.
-  // Tapping a photo opens it large; if a sharper "<name>-full.webp" sits next to it, that copy is shown there.
-  photos: {
-    'wed-hero': 'assets/photos/hero.webp',
-    'wed-groom': 'assets/photos/groom.webp',
-    'wed-bride': 'assets/photos/bride.webp',
-    'wed-story-chay-1': 'assets/photos/story-chay-1.webp',
-    'wed-story-chay-2': 'assets/photos/story-chay-2.webp',
-    'wed-story-chay-3': 'assets/photos/story-chay-3.webp',
-    'wed-story-chay-4': 'assets/photos/story-chay-4.webp',
-    'wed-story-chay-5': 'assets/photos/story-chay-5.webp',
-    'wed-story-chay-6': 'assets/photos/story-chay-6.webp',
-    'wed-story-chay-7': 'assets/photos/story-chay-7.webp',
-    'wed-story-chay-8': 'assets/photos/story-chay-8.webp',
-    'wed-story-hg-1': 'assets/photos/story-hg-1.webp',
-    'wed-story-hg-2': 'assets/photos/story-hg-2.webp',
-    'wed-story-hg-3': 'assets/photos/story-hg-3.webp',
-    'wed-story-hg-4': 'assets/photos/story-hg-4.webp',
-    'wed-story-hg-5': 'assets/photos/story-hg-5.webp',
-    'wed-story-hg-6': 'assets/photos/story-hg-6.webp',
-    'wed-story-hg-7': 'assets/photos/story-hg-7.webp',
-    'wed-story-hue-1': 'assets/photos/story-hue-1.webp',
-    'wed-story-hue-2': 'assets/photos/story-hue-2.webp',
-    'wed-story-hue-3': 'assets/photos/story-hue-3.webp',
-    'wed-story-nb-1': 'assets/photos/story-nb-1.webp',
-    'wed-story-nb-2': 'assets/photos/story-nb-2.webp',
-    'wed-story-ql-1': 'assets/photos/story-ql-1.webp',
-    'wed-story-ql-2': 'assets/photos/story-ql-2.webp',
-    'wed-story-ql-3': 'assets/photos/story-ql-3.webp',
-    'wed-story-ql-4': 'assets/photos/story-ql-4.webp',
-    'wed-story-sp-1': 'assets/photos/story-sp-1.webp',
-    'wed-story-sp-2': 'assets/photos/story-sp-2.webp',
-    'wed-story-td-1': 'assets/photos/story-td-1.webp',
-    'wed-story-td-2': 'assets/photos/story-td-2.webp',
-    'wed-story-td-3': 'assets/photos/story-td-3.webp',
-    'wed-story-yt-1': 'assets/photos/story-yt-1.webp',
-    'wed-g1': 'assets/photos/album-1.webp',
-    'wed-g2': 'assets/photos/album-2.webp',
-    'wed-g3': 'assets/photos/album-3.webp',
-    'wed-g4': 'assets/photos/album-4.webp',
-    'wed-g5': 'assets/photos/album-5.webp',
-    'wed-g6': 'assets/photos/album-6.webp',
-    'wed-g7': 'assets/photos/album-7.webp',
-    'wed-g8': 'assets/photos/album-8.webp',
-    'wed-g9': 'assets/photos/album-9.webp',
-    'wed-g10': 'assets/photos/album-10.webp',
-    'wed-g11': 'assets/photos/album-11.webp',
-    'wed-g12': 'assets/photos/album-12.webp',
-    'wed-g13': 'assets/photos/album-13.webp',
-    'wed-qr-groom': 'assets/photos/qr-groom.webp',
-    'wed-qr-bride': 'assets/photos/qr-bride.webp'
-  },
+  // Photos: every place on the page that shows a photo has a fixed file name. Put the photo in
+  // assets/photos/ under that name; the extension may be .jpg, .jpeg, .png or .webp (lower case).
+  //   anh-bia                ảnh bìa (dọc, khoảng 4:5)
+  //   chu-re, co-dau         ảnh chú rể, ảnh cô dâu (dọc 2:3)
+  //   album-01 … album-NN    ảnh album, NN = albumCount below (dọc 2:3)
+  //   qr-nha-trai, qr-nha-gai  mã QR mừng cưới (vuông)
+  //   chia-se.jpg            ảnh hiện khi chia sẻ link (ngang 1200×630, must be .jpg)
+  // A missing file keeps the placeholder frame, which shows the name it expects.
+  // Tapping a photo opens it large; a sharper copy named "<name>-full.<ext>" next to it is used there if present.
+  photoDir: 'assets/photos/',
+  albumCount: 13,
 
   // Where each venue is on the map: the embedded maps in "Chỉ đường" are drawn from these coordinates
   // (the "Mở Google Maps" buttons use the links below)

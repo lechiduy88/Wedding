@@ -5,7 +5,7 @@ RSVPs, guestbook wishes and the hidden game's leaderboard are stored in a Google
 
 ## One-time setup
 
-1. Create a new Google Sheet (any name, e.g. **PhuongHuongWedding**).
+1. Create a new Google Sheet (any name, e.g. **Wedding**).
 2. In the sheet: **Extensions → Apps Script**.
 3. Delete the sample code, paste the whole content of [`Code.gs`](Code.gs), and save.
 4. **Deploy → New deployment → Select type: Web app**

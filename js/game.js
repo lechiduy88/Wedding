@@ -1,4 +1,4 @@
-/* PhuongHuongWedding — hidden mini game. PROTOTYPE: four candidate mechanics, pick one.
+/* Wedding — hidden mini game. PROTOTYPE: four candidate mechanics, pick one.
  *
  * The game is never announced. Guests find it in one of two ways:
  *   - a golden heart drifts across the page now and then; the second one tapped starts a round
@@ -688,8 +688,8 @@
     // The first heart passes in silence; from the second one on, a single whisper may point at it
     if (!from && luresShown >= 2) whisper();
   }
-  // A heart also rises out of the thank-you message after an RSVP or a wish: a small reward at a happy moment
-  ['#rsvp-sent', '#wish-thanks'].forEach((sel) => {
+  // A heart also rises out of the thank-you message after a wish: a small reward at a happy moment
+  ['#wish-thanks'].forEach((sel) => {
     const node = document.querySelector(sel);
     if (!node) return;
     new MutationObserver(() => {

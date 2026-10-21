@@ -1,12 +1,12 @@
-/* PhuongHuongWedding — hidden mini game (prototype). Everything here is created by js/game.js. */
+/* Wedding — hidden mini game (prototype). Everything here is created by js/game.js. */
 
 .wed-game-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:60;pointer-events:none}
 /* No double-tap zoom while a round is on */
 .wed-game-on{touch-action:manipulation}
 .wed-game-on body{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 
-/* Score bar: slides in under the navigation when the guest pops a first shape */
-.wed-game-hud{position:fixed;top:calc(64px + env(safe-area-inset-top));left:50%;z-index:70;width:min(440px,calc(100vw - 24px));transform:translateX(-50%);padding:10px 14px 12px;background:color-mix(in srgb,var(--color-bg) 94%,transparent);backdrop-filter:blur(10px);border:1px solid var(--color-accent-2,var(--color-divider));border-radius:var(--radius-md);box-shadow:var(--shadow-md);pointer-events:none;animation:wed-game-in .45s cubic-bezier(.2,.9,.3,1.2)}
+/* Score bar: slides in at the top when the guest pops a first shape */
+.wed-game-hud{position:fixed;top:calc(12px + env(safe-area-inset-top));left:50%;z-index:70;width:min(440px,calc(100vw - 24px));transform:translateX(-50%);padding:10px 14px 12px;background:color-mix(in srgb,var(--color-bg) 94%,transparent);backdrop-filter:blur(10px);border:1px solid var(--color-accent-2,var(--color-divider));border-radius:var(--radius-md);box-shadow:var(--shadow-md);pointer-events:none;animation:wed-game-in .45s cubic-bezier(.2,.9,.3,1.2)}
 .wed-game-row{display:flex;align-items:center;gap:10px}
 .wed-game-name{flex:1;font-family:var(--font-heading);font-size:17px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wed-game-want{width:28px;height:28px;flex:none}
