@@ -1,6 +1,6 @@
 # Wedding
 
-Online wedding invitation for **Hoài Nam & Hà Lâm** — wedding ceremony on 18 · 10 · 2026.
+Online wedding invitation for **Hoài Nam & Hà Lâm** — wedding ceremony on 29 · 11 · 2026.
 
 A static HTML/CSS/JS site with no build step. RSVPs and guestbook wishes are stored in a
 Google Sheet through a small Google Apps Script. The visual design comes from the

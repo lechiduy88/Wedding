@@ -25,7 +25,7 @@ window.WEDDING_CONFIG = {
   game: { enabled: true, mode: 'random', lab: true },
 
   // Wedding ceremony time, used by the countdown
-  weddingTime: '2026-10-18T10:00:00+07:00',
+  weddingTime: '2026-11-29T10:00:00+07:00',
 
   // Google Apps Script web app URL (ends with /exec) that stores RSVPs and wishes
   // in a Google Sheet — see backend/README.md. While this is empty the site runs in
@@ -52,19 +52,19 @@ window.WEDDING_CONFIG = {
   photoDir: 'assets/photos/',
   albumCount: 13,
 
-  // Where each venue is on the map: the embedded maps in "Chỉ đường" are drawn from these coordinates
-  // (the "Mở Google Maps" buttons use the links below)
+  // Where each venue is on the map: the embedded maps in "Chỉ đường" are drawn from these coordinates,
+  // or from a search text `q` until the exact pin is known (the "Mở Google Maps" buttons use the links below)
   mapPoints: {
-    'phu-nhieu': { lat: 20.7621251, lng: 105.8864202 },
-    'tuan-hung': { lat: 20.976221, lng: 106.451235 }
+    'nha-trai': { lat: 21.53266352099579, lng: 105.23380318498212 },
+    'nha-gai': { lat: 21.566778, lng: 105.211667 }
   },
 
   // Google Maps links for the two venues (pinned locations)
   maps: {
-    // Nhà trai — Nhà văn hoá thôn Phú Nhiêu, Hà Nội
-    'phu-nhieu': 'https://maps.app.goo.gl/wuygYBDE575YC3n49',
-    // Nhà gái — thôn Tuấn Hưng, Hải Phòng
-    'tuan-hung': 'https://maps.app.goo.gl/UqZ5Ab8mKspCNC3k8'
+    // Nhà trai — thôn 21 Minh Phú, xã Chân Mộng, Phú Thọ
+    'nha-trai': 'https://www.google.com/maps?q=21.53266352099579,105.23380318498212',
+    // Nhà gái — tư gia nhà gái
+    'nha-gai': 'https://www.google.com/maps?q=21.566778,105.211667'
   },
 
   // Bank accounts for wedding gifts. An empty account keeps the "to be updated" text.

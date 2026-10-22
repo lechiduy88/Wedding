@@ -210,7 +210,7 @@ function countWords(text) {
   return words[0] ? words.length : 0;
 }
 
-/** Number of distinct dates (dd/mm) among the chosen events, e.g. "Tiệc nhà trai 17/10, Lễ vu quy 18/10" → 2. */
+/** Number of distinct dates (dd/mm) among the chosen events, e.g. "Lễ ăn hỏi 28/11, Lễ thành hôn 29/11" → 2. */
 function attendedDays(events) {
   const dates = String(events).match(/\d{1,2}\/\d{1,2}/g) || [];
   return dates.filter(function (d, i) { return dates.indexOf(d) === i; }).length;

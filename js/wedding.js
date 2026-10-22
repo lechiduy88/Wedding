@@ -310,7 +310,9 @@
     const points = cfg.mapPoints || {};
     for (const frame of $$('[data-map-embed]')) {
       const p = points[frame.getAttribute('data-map-embed')];
-      if (p) frame.src = 'https://maps.google.com/maps?q=' + p.lat + ',' + p.lng + '&z=16&hl=vi&output=embed';
+      if (!p) continue;
+      const q = p.q ? encodeURIComponent(p.q) : p.lat + ',' + p.lng;
+      frame.src = 'https://maps.google.com/maps?q=' + q + '&z=' + (p.q ? 14 : 16) + '&hl=vi&output=embed';
     }
   }
   function initGift() {
@@ -488,7 +490,7 @@
     const cells = {};
     for (const el of $$('[data-cd]')) cells[el.getAttribute('data-cd')] = el;
     if (!cells.d) return;
-    const target = new Date(cfg.weddingTime || '2026-10-18T10:00:00+07:00').getTime();
+    const target = new Date(cfg.weddingTime || '2026-11-29T10:00:00+07:00').getTime();
     const p = (n) => String(n).padStart(2, '0');
     let timer = 0;
     const tick = () => {
@@ -501,6 +503,26 @@
     };
     timer = setInterval(tick, 1000);
     tick();
+  }
+
+  /* ===== Month calendar: the wedding month, weeks starting on Monday, the day marked with a heart ===== */
+  function initMonthCalendar() {
+    const box = $('#wed-month');
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(cfg.weddingTime || '');
+    if (!box || !m) return;
+    const year = +m[1], month = +m[2], day = +m[3];
+    const lead = (new Date(year, month - 1, 1).getDay() + 6) % 7;
+    const days = new Date(year, month, 0).getDate();
+    let cells = '';
+    for (const d of ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN']) cells += '<span class="wed-month-dow">' + d + '</span>';
+    for (let i = 0; i < lead; i++) cells += '<span></span>';
+    for (let d = 1; d <= days; d++) {
+      cells += d === day
+        ? '<span class="wed-month-day is-wedding" aria-label="Ngày cưới ' + d + '"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28C4 19 3 12 6.5 8.5 9.6 5.4 14 6.6 16 10c2-3.4 6.4-4.6 9.5-1.5C29 12 28 19 16 28z"/></svg><b>' + d + '</b></span>'
+        : '<span class="wed-month-day">' + d + '</span>';
+    }
+    box.innerHTML = '<p class="wed-month-title">Tháng ' + month + ' · ' + year + '</p><div class="wed-month-grid">' + cells + '</div>';
+    box.hidden = false;
   }
 
   /* ===== Reveal on scroll ===== */
@@ -1410,6 +1432,7 @@
   initPopovers();
   initPresets();
   initCountdown();
+  initMonthCalendar();
   initReveal();
   initGuestbook();
   atm = initAtmosphere();

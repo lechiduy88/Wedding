@@ -8,36 +8,34 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 ---
 
 ## 1. Màn mở thiệp
-- Hai tấm rèm nhung, giữa có dòng "Thiệp mời đám cưới", tên **Hoài Nam & Hà Lâm** ✅ và ngày **18 · 10 · 2026** ⚠️.
+- Hai tấm rèm nhung, giữa có dòng "Thiệp mời đám cưới", tên **Hoài Nam & Hà Lâm** ✅ và ngày **29 · 11 · 2026** ✅.
 - Nút **"Mở thiệp"**: rèm kéo ra và nhạc nền bắt đầu phát. Nút **"Mở thiệp không nhạc"**: mở mà không phát nhạc.
 - Màn rèm chỉ hiện một lần mỗi phiên trình duyệt.
 - Góc màn hình có nút tròn để bật/tắt nhạc. Bài hát nằm ở `assets/audio/song.mp3` ⚠️.
 
 ## 2. Ảnh bìa
-- Dòng nhỏ "Thiệp mời · Lễ thành hôn", tên hai bạn ✅, ngày cưới ⚠️.
-- Lời mời: *"Chúng tôi trân trọng kính mời quý vị đến chung vui… tại Phú Nhiêu, Phú Xuyên, Hà Nội và Tuấn Hưng, Lai Khê, Hải Phòng"*. Địa danh trong câu này ⚠️.
+- Dòng nhỏ "Thiệp mời · Lễ thành hôn", tên hai bạn ✅, ngày cưới ✅.
+- Lời mời: *"Chúng tôi trân trọng kính mời quý vị đến chung vui… tại xã Chân Mộng, tỉnh Phú Thọ"*.
 - Hai nút: **Xem lịch trình** và **Chỉ đường**.
 - Ảnh cưới dọc `anh-bia` (chưa có ảnh).
 
 ## 3. Đếm ngược
-- Đếm ngày, giờ, phút, giây đến **10:00 AM · Chủ Nhật, 18/10/2026** ⚠️.
-- Ngày này đã qua nên đồng hồ đang đứng ở 0. Giờ cưới sửa ở `weddingTime` trong `js/config.js`.
+- Đếm ngày, giờ, phút, giây đến **10:00 AM · Chủ Nhật, 29/11/2026** ✅. Giờ cưới sửa ở `weddingTime` trong `js/config.js`.
+- Bên dưới là tờ lịch tháng 11/2026, ngày 29 có trái tim đập nhẹ. Lịch tự vẽ theo `weddingTime`.
 
 ## 4. Hai gia đình (Nhà trai · Nhà gái)
 | | Nhà trai | Nhà gái |
 |---|---|---|
 | Tên | Nguyễn Hoài Nam — Chú rể ✅ | Nguyễn Hà Lâm — Cô dâu ✅ |
 | Ảnh | `chu-re` (chưa có ảnh) | `co-dau` (chưa có ảnh) |
-| Thân phụ | Ông Vũ Văn Long ⚠️ | Ông Ninh Văn Tưởng ⚠️ |
-| Thân mẫu | Bà Nguyễn Thị Kim Lan ⚠️ | Bà Phạm Thị Ngát ⚠️ |
+| Thân phụ | Ông Nguyễn Hồng Minh ✅ | Ông Nguyễn Xuân Quảng ✅ |
+| Thân mẫu | Bà Nguyễn Thị Bảy ✅ | Bà Nguyễn Thị Dần ✅ |
 
-## 5. Lịch trình — "Bốn buổi lễ, hai ngày" ⚠️
+## 5. Lịch trình — "Hai buổi lễ, hai ngày"
 | Giờ | Ngày | Buổi | Bên | Địa điểm |
 |---|---|---|---|---|
-| 4:30 PM | Thứ Bảy 17/10/2026 | Tiệc mừng nhà trai | Nhà trai | Nhà văn hoá thôn Phú Nhiêu, xã Phú Xuyên, Hà Nội |
-| 5:00 PM | Thứ Bảy 17/10/2026 | Tiệc mừng nhà gái | Nhà gái | Tư gia nhà gái, thôn Tuấn Hưng, xã Lai Khê, TP Hải Phòng |
-| 6:30 AM | Chủ Nhật 18/10/2026 | Lễ vu quy | Nhà gái | Tư gia nhà gái, thôn Tuấn Hưng |
-| 10:00 AM | Chủ Nhật 18/10/2026 | **Lễ thành hôn** | Nhà trai | Nhà văn hoá thôn Phú Nhiêu |
+| 8:30 AM | Thứ Bảy 28/11/2026 | Lễ ăn hỏi | Nhà gái | Tư gia nhà gái, xã Chân Mộng, tỉnh Phú Thọ |
+| 10:00 AM | Chủ Nhật 29/11/2026 | **Lễ thành hôn** | Nhà trai | Tư gia nhà trai, thôn 21 Minh Phú, xã Chân Mộng, tỉnh Phú Thọ |
 
 Mỗi buổi có hai nút:
 - **Chỉ đường**: nhảy xuống phần bản đồ.
@@ -56,10 +54,10 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 - Nhà gái: Nguyễn Hà Lâm ✅, nhưng mã QR và ngân hàng (VPBank) vẫn của cô dâu cũ ⚠️.
 - **Phải thêm ảnh `qr-nha-trai`, `qr-nha-gai` và sửa tên ngân hàng trước khi gửi**, để tiền mừng không chuyển nhầm người.
 
-## 8. Chỉ đường — "Hai địa điểm" ⚠️
+## 8. Chỉ đường — "Hai địa điểm"
 - Bản đồ Google Maps nhúng kèm nút "Mở Google Maps" cho:
-  - Nhà văn hoá thôn Phú Nhiêu (Hà Nội)
-  - Tư gia nhà gái, thôn Tuấn Hưng (Hải Phòng)
+  - Tư gia nhà trai, thôn 21 Minh Phú (Phú Thọ) ✅
+  - Tư gia nhà gái, xã Chân Mộng (Phú Thọ) ✅
 - Tọa độ sửa ở `mapPoints`, link sửa ở `maps` trong `js/config.js`.
 
 ## 9. Sổ lưu bút — "Lời chúc của mọi người"
@@ -68,7 +66,7 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 - Chưa có backend nên lời chúc chỉ lưu trong trình duyệt của từng khách ⚠️.
 
 ## 10. Chân trang
-- "Hoài Nam & Hà Lâm" ✅ và dòng "18 · 10 · 2026 — Cảm ơn bạn đã ở bên chúng tôi!" (ngày ⚠️).
+- "Hoài Nam & Hà Lâm" ✅ và dòng "29 · 11 · 2026 — Cảm ơn bạn đã ở bên chúng tôi!" ✅.
 
 ## Thành phần luôn có trên trang
 - **Thanh nút nổi** ở cuối màn hình: *Gửi lời chúc* và *Chỉ đường*. Thanh tự ẩn khi khách tới form gửi lời chúc.

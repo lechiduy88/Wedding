@@ -5,13 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:le-thanh-hon@wedding
-DTSTAMP:20260921T000000Z
-DTSTART:20261018T030000Z
-DTEND:20261018T060000Z
+DTSTAMP:20261022T000000Z
+DTSTART:20261129T030000Z
+DTEND:20261129T060000Z
 SUMMARY:Lễ thành hôn — Hoài Nam & Hà Lâm
-LOCATION:Nhà văn hoá thôn Phú Nhiêu\, xã Phú Xuyên\, Hà Nội
-DESCRIPTION:Trân trọng kính mời bạn đến chung vui cùng hai gi
- a đình.
+LOCATION:Tư gia nhà trai\, thôn 21 Minh Phú\, xã Chân Mộng\, tỉnh
+  Phú Thọ
+DESCRIPTION:Trân trọng kính mời bạn đến chung vui cùng hai gia 
+ đình.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Lễ thành hôn — Hoài Nam & Hà Lâm
