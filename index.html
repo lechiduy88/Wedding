@@ -243,21 +243,31 @@
     <p class="wed-lead">Sự hiện diện của bạn là niềm vui lớn nhất của chúng mình. Tấm lòng của bạn, dù ở gần hay ở xa, đều là món quà quý giá nhất.</p>
     <!-- The QR codes stay inside a gift box until the guest taps it open -->
     <button type="button" class="wed-giftbox wed-reveal" data-reveal id="gift-box" aria-expanded="false" aria-controls="gift-grid">
-      <svg class="wed-giftbox-art" viewBox="0 0 120 112" aria-hidden="true">
-        <ellipse class="wed-giftbox-shadow" cx="60" cy="107" rx="40" ry="4"/>
-        <g class="wed-giftbox-body">
-          <rect x="20" y="58" width="80" height="46" rx="2"/>
-          <rect class="wed-giftbox-ribbon" x="53" y="58" width="14" height="46"/>
-          <rect x="20" y="58" width="80" height="4" fill="#000" opacity=".16"/>
-        </g>
-        <g class="wed-giftbox-lid">
-          <rect x="14" y="40" width="92" height="20" rx="3"/>
-          <rect class="wed-giftbox-ribbon" x="53" y="40" width="14" height="20"/>
-          <path class="wed-giftbox-ribbon" d="M60 40C50 24 32 22 35 33c2 7 15 8 25 7zM60 40c10-16 28-18 25-7-2 7-15 8-25 7z"/>
-          <circle class="wed-giftbox-knot" cx="60" cy="39" r="4.5"/>
-        </g>
-      </svg>
-      <span class="wed-giftbox-hint">Chạm để mở hộp quà</span>
+      <span class="wed-giftbox-stage">
+        <span class="wed-giftbox-rays" aria-hidden="true"></span>
+        <span class="wed-giftbox-glow" aria-hidden="true"></span>
+        <i class="wed-giftbox-spark" aria-hidden="true"></i><i class="wed-giftbox-spark" aria-hidden="true"></i><i class="wed-giftbox-spark" aria-hidden="true"></i><i class="wed-giftbox-spark" aria-hidden="true"></i><i class="wed-giftbox-spark" aria-hidden="true"></i>
+        <svg class="wed-giftbox-art" viewBox="0 0 120 112" aria-hidden="true">
+          <ellipse class="wed-giftbox-shadow" cx="60" cy="107" rx="40" ry="4"/>
+          <g class="wed-giftbox-body">
+            <rect x="20" y="58" width="80" height="46" rx="2"/>
+            <rect class="wed-giftbox-ribbon" x="53" y="58" width="14" height="46"/>
+            <rect x="20" y="58" width="80" height="4" fill="#000" opacity=".16"/>
+            <path class="wed-giftbox-tagline" d="M67 62c6 4 12 6 18 7"/>
+            <g class="wed-giftbox-tag" transform="rotate(10 92 74)">
+              <path d="M82 66h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H82l-5-8z"/>
+              <path class="wed-giftbox-tag-heart" d="M92 78c-4-2.6-4.6-4.8-3.4-6 1-1 2.6-.6 3.4.6.8-1.2 2.4-1.6 3.4-.6 1.2 1.2.6 3.4-3.4 6z"/>
+            </g>
+          </g>
+          <g class="wed-giftbox-lid">
+            <rect x="14" y="40" width="92" height="20" rx="3"/>
+            <rect class="wed-giftbox-ribbon" x="53" y="40" width="14" height="20"/>
+            <path class="wed-giftbox-ribbon" d="M60 40C50 24 32 22 35 33c2 7 15 8 25 7zM60 40c10-16 28-18 25-7-2 7-15 8-25 7z"/>
+            <circle class="wed-giftbox-knot" cx="60" cy="39" r="4.5"/>
+          </g>
+        </svg>
+      </span>
+      <span class="wed-giftbox-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C4.5 15 3.8 10.6 6 8.4c1.9-1.9 4.7-1.2 6 .9 1.3-2.1 4.1-2.8 6-.9 2.2 2.2 1.5 6.6-6 12.1z" fill="currentColor"/></svg>Chạm để mở hộp quà</span>
     </button>
     <div class="wed-gift-grid" id="gift-grid" tabindex="-1">
       <article class="wed-gift-card wed-reveal" data-reveal data-gift="groom">

@@ -320,14 +320,46 @@
     const box = $('#gift-box');
     const grid = $('#gift-grid');
     if (box && grid) {
+      const reveal = () => {
+        box.hidden = true;
+        grid.classList.add('is-open');
+        grid.focus({ preventScroll: true });
+      };
+      // Confetti and hearts fly out of the box in every direction, then fall away
+      const burst = () => {
+        const wrap = document.createElement('span');
+        wrap.className = 'wed-burst';
+        wrap.setAttribute('aria-hidden', 'true');
+        const colors = ['var(--wed-accent)', 'var(--wed-primary)', 'var(--wed-secondary)', 'var(--wed-accent-deep)', '#fff'];
+        for (let i = 0; i < 46; i++) {
+          const piece = document.createElement('i');
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 90 + Math.random() * 150;
+          if (i % 4 === 0) {
+            piece.className = 'is-heart';
+            piece.textContent = '\u2665';
+            piece.style.setProperty('--s', 12 + Math.random() * 12 + 'px');
+          }
+          piece.style.setProperty('--c', colors[i % colors.length]);
+          piece.style.setProperty('--x', Math.cos(angle) * dist + 'px');
+          piece.style.setProperty('--y', Math.sin(angle) * dist * 0.8 + 50 + 'px');
+          piece.style.setProperty('--r', (Math.random() * 2 - 1) * 540 + 'deg');
+          piece.style.setProperty('--t', Math.random() * 0.12 + 's');
+          wrap.appendChild(piece);
+        }
+        wrap.style.top = box.offsetTop + box.offsetHeight * 0.4 + 'px';
+        box.parentNode.insertBefore(wrap, box);
+        setTimeout(() => wrap.remove(), 1700);
+      };
       box.addEventListener('click', () => {
         box.setAttribute('aria-expanded', 'true');
-        box.classList.add('is-opening');
+        if (reducedMotion) { reveal(); return; }
+        box.classList.add('is-shaking');
         setTimeout(() => {
-          box.hidden = true;
-          grid.classList.add('is-open');
-          grid.focus({ preventScroll: true });
-        }, reducedMotion ? 0 : 700);
+          box.classList.add('is-opening');
+          burst();
+        }, 400);
+        setTimeout(reveal, 1250);
       }, { once: true });
     }
   }
