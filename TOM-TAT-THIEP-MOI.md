@@ -17,7 +17,7 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 - Dòng nhỏ "Thiệp mời · Lễ thành hôn", tên hai bạn ✅, ngày cưới ✅.
 - Lời mời: *"Chúng tôi trân trọng kính mời quý vị đến chung vui… tại xã Chân Mộng, tỉnh Phú Thọ"*.
 - Hai nút: **Xem lịch trình** và **Chỉ đường**.
-- Ảnh cưới dọc `anh-bia` (chưa có ảnh).
+- Ảnh cưới dọc `anh-bia` ✅.
 
 ## 3. Đếm ngược
 - Đếm ngày, giờ, phút, giây đến **10:00 AM · Chủ Nhật, 29/11/2026** ✅. Giờ cưới sửa ở `weddingTime` trong `js/config.js`.
@@ -27,7 +27,7 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 | | Nhà trai | Nhà gái |
 |---|---|---|
 | Tên | Nguyễn Hoài Nam — Chú rể ✅ | Nguyễn Hà Lâm — Cô dâu ✅ |
-| Ảnh | `chu-re` (chưa có ảnh) | `co-dau` (chưa có ảnh) |
+| Ảnh | `chu-re` ✅ | `co-dau` ✅ |
 | Ông | Nguyễn Hồng Minh ✅ | Nguyễn Xuân Quảng ✅ |
 | Bà | Nguyễn Thị Bảy ✅ | Nguyễn Thị Dần ✅ |
 
@@ -44,9 +44,9 @@ Mỗi buổi có hai nút:
 Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong `index.html`, trong link Google Calendar và trong file `.ics` tương ứng.
 
 ## 6. Album — "Những khoảnh khắc" ⚠️
-- 13 ảnh cưới (`album-01` … `album-13`, chưa có ảnh; số lượng đổi bằng `albumCount` trong `js/config.js`) xếp thành **vòng tròn xoay 3D**. Ảnh phía trước to và sáng nhất, các ảnh phía sau mờ dần. Mỗi ảnh có khung viền vàng trên nền ngà, bên dưới là một vòng ellipse ánh vàng.
+- 12 ảnh cưới (`album-01` … `album-12` ✅; số lượng đổi bằng `albumCount` trong `js/config.js`) xếp thành **vòng tròn xoay 3D**. Ảnh phía trước to và sáng nhất, các ảnh phía sau mờ dần. Mỗi ảnh có khung viền vàng trên nền ngà, bên dưới là một vòng ellipse ánh vàng.
 - Vòng quay đều và liên tục, khoảng 4,5 giây qua một ảnh, chỉ khi khách đang nhìn tới album. Khi khách rê chuột lên vòng ảnh thì vòng chậm dần rồi dừng.
-- Vuốt hoặc kéo để xoay. Thả tay ra thì vòng còn trôi theo đà rồi chậm dần về tốc độ thường. Có nút ‹ › và số thứ tự "01 — 13". Trên máy tính dùng được phím ← →.
+- Vuốt hoặc kéo để xoay. Thả tay ra thì vòng còn trôi theo đà rồi chậm dần về tốc độ thường. Có nút ‹ › và số thứ tự "01 — 12". Trên máy tính dùng được phím ← →.
 - Chạm ảnh bên cạnh (hoặc bấm ‹ ›) thì vòng tăng tốc rồi giảm tốc êm đưa ảnh đó ra trước, dừng khoảng 2,5 giây rồi quay tiếp. Chạm ảnh phía trước thì mở xem lớn (phóng to, vuốt sang ảnh khác).
 
 ## 7. Hộp mừng cưới — "Gửi lời chúc từ xa" ⚠️
@@ -72,7 +72,7 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 - **Thanh nút nổi** ở cuối màn hình: *Gửi lời chúc* và *Chỉ đường*. Thanh tự ẩn khi khách tới form gửi lời chúc.
 - **Nền động**: cánh hoa, trái tim, ngôi sao rơi. Chạm vào thì chúng nổ tung.
 - **Mini game ẩn**: chạm nổ 4 cánh hoa, hoặc chạm trái tim vàng bay ngang trang, là mở ra trò chơi. Điểm cao được lưu lên **"Bảng vàng"**.
-- **Ảnh xem trước khi chia sẻ link** (Zalo/Facebook): tiêu đề "Nam & Lâm mời bạn đến đám cưới" ✅, ảnh `chia-se.jpg` (chưa có ảnh).
+- **Ảnh xem trước khi chia sẻ link** (Zalo/Facebook): tiêu đề "Nam & Lâm mời bạn đến đám cưới" ✅, ảnh `chia-se.jpg` ✅.
 
 ---
 

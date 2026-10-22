@@ -12,14 +12,14 @@ Thiệp tự nhận ảnh, không cần sửa code.
 | Ảnh bìa (đầu trang) | `anh-bia` | dọc, khoảng 4:5 |
 | Ảnh chú rể (phần Hai gia đình) | `chu-re` | dọc 2:3 |
 | Ảnh cô dâu (phần Hai gia đình) | `co-dau` | dọc 2:3 |
-| Album vòng xoay | `album-01`, `album-02`, … `album-13` | dọc 2:3 |
-| Mã QR mừng cưới nhà trai | `qr-nha-trai` | vuông |
-| Mã QR mừng cưới nhà gái | `qr-nha-gai` | vuông |
+| Album vòng xoay | `album-01`, `album-02`, … `album-12` | dọc 2:3 |
+| Mã QR mừng cưới nhà trai | `qr-nha-trai` | dọc 5:7 |
+| Mã QR mừng cưới nhà gái | `qr-nha-gai` | dọc 5:7 |
 | Ảnh hiện khi chia sẻ link (Zalo, Facebook) | `chia-se.jpg` (**bắt buộc .jpg**) | ngang 1200×630 |
 
 Ví dụ: `anh-bia.jpg`, `chu-re.jpg`, `album-01.jpg`, `album-02.jpg`, `qr-nha-trai.png`, `chia-se.jpg`.
 
-## Album nhiều hoặc ít hơn 13 ảnh
+## Album nhiều hoặc ít hơn 12 ảnh
 Đánh số liên tục từ `album-01`, rồi sửa `albumCount` trong `js/config.js` thành đúng số ảnh.
 Ví dụ có 20 ảnh thì dùng `album-01` … `album-20` và đặt `albumCount: 20`.
 

@@ -45,12 +45,12 @@ window.WEDDING_CONFIG = {
   //   anh-bia                ảnh bìa (dọc, khoảng 4:5)
   //   chu-re, co-dau         ảnh chú rể, ảnh cô dâu (dọc 2:3)
   //   album-01 … album-NN    ảnh album, NN = albumCount below (dọc 2:3)
-  //   qr-nha-trai, qr-nha-gai  mã QR mừng cưới (vuông)
+  //   qr-nha-trai, qr-nha-gai  mã QR mừng cưới (dọc 5:7)
   //   chia-se.jpg            ảnh hiện khi chia sẻ link (ngang 1200×630, must be .jpg)
   // A missing file keeps the placeholder frame, which shows the name it expects.
   // Tapping a photo opens it large; a sharper copy named "<name>-full.<ext>" next to it is used there if present.
   photoDir: 'assets/photos/',
-  albumCount: 13,
+  albumCount: 12,
 
   // Where each venue is on the map: the embedded maps in "Chỉ đường" are drawn from these coordinates,
   // or from a search text `q` until the exact pin is known (the "Mở Google Maps" buttons use the links below)
