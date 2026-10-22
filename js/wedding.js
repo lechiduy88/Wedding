@@ -314,6 +314,20 @@
     }
   }
   function initGift() {
+    // Tapping the gift box lifts its lid, then the QR codes take its place
+    const box = $('#gift-box');
+    const grid = $('#gift-grid');
+    if (box && grid) {
+      box.addEventListener('click', () => {
+        box.setAttribute('aria-expanded', 'true');
+        box.classList.add('is-opening');
+        setTimeout(() => {
+          box.hidden = true;
+          grid.classList.add('is-open');
+          grid.focus({ preventScroll: true });
+        }, reducedMotion ? 0 : 700);
+      }, { once: true });
+    }
     const gift = cfg.gift || {};
     for (const card of $$('[data-gift]')) {
       const info = gift[card.getAttribute('data-gift')];
