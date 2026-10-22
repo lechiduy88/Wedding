@@ -52,7 +52,7 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 ## 7. Hộp mừng cưới — "Gửi lời chúc từ xa" ⚠️
 - Mã QR nằm trong một hộp quà; khách chạm vào hộp thì nắp bật lên và hai mã QR hiện ra.
 - Mỗi thẻ chỉ ghi "Nhà trai · Nguyễn Hoài Nam" / "Nhà gái · Nguyễn Hà Lâm" ✅, không ghi ngân hàng.
-- **Phải thêm ảnh `qr-nha-trai`, `qr-nha-gai` trước khi gửi** ⚠️.
+- Ảnh QR: `qr-nha-trai.jpeg` (Hoài Nam, Techcombank) và `qr-nha-gai.jpeg` (Hà Lâm, Techcombank) ✅.
 
 ## 8. Chỉ đường — "Hai địa điểm"
 - Bản đồ Google Maps nhúng kèm nút "Mở Google Maps" cho:
