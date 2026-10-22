@@ -28,8 +28,8 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 |---|---|---|
 | Tên | Nguyễn Hoài Nam — Chú rể ✅ | Nguyễn Hà Lâm — Cô dâu ✅ |
 | Ảnh | `chu-re` (chưa có ảnh) | `co-dau` (chưa có ảnh) |
-| Thân phụ | Ông Nguyễn Hồng Minh ✅ | Ông Nguyễn Xuân Quảng ✅ |
-| Thân mẫu | Bà Nguyễn Thị Bảy ✅ | Bà Nguyễn Thị Dần ✅ |
+| Ông | Nguyễn Hồng Minh ✅ | Nguyễn Xuân Quảng ✅ |
+| Bà | Nguyễn Thị Bảy ✅ | Nguyễn Thị Dần ✅ |
 
 ## 5. Lịch trình — "Hai buổi lễ, hai ngày"
 | Giờ | Ngày | Buổi | Bên | Địa điểm |
@@ -50,9 +50,9 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 - Chạm ảnh bên cạnh (hoặc bấm ‹ ›) thì vòng tăng tốc rồi giảm tốc êm đưa ảnh đó ra trước, dừng khoảng 2,5 giây rồi quay tiếp. Chạm ảnh phía trước thì mở xem lớn (phóng to, vuốt sang ảnh khác).
 
 ## 7. Hộp mừng cưới — "Gửi lời chúc từ xa" ⚠️
-- Nhà trai: Nguyễn Hoài Nam ✅, nhưng mã QR và ngân hàng (MSB) vẫn của chú rể cũ ⚠️.
-- Nhà gái: Nguyễn Hà Lâm ✅, nhưng mã QR và ngân hàng (VPBank) vẫn của cô dâu cũ ⚠️.
-- **Phải thêm ảnh `qr-nha-trai`, `qr-nha-gai` và sửa tên ngân hàng trước khi gửi**, để tiền mừng không chuyển nhầm người.
+- Mã QR nằm trong một hộp quà; khách chạm vào hộp thì nắp bật lên và hai mã QR hiện ra.
+- Mỗi thẻ chỉ ghi "Nhà trai · Nguyễn Hoài Nam" / "Nhà gái · Nguyễn Hà Lâm" ✅, không ghi ngân hàng.
+- **Phải thêm ảnh `qr-nha-trai`, `qr-nha-gai` trước khi gửi** ⚠️.
 
 ## 8. Chỉ đường — "Hai địa điểm"
 - Bản đồ Google Maps nhúng kèm nút "Mở Google Maps" cho:

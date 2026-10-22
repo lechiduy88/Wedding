@@ -330,24 +330,6 @@
         }, reducedMotion ? 0 : 700);
       }, { once: true });
     }
-    const gift = cfg.gift || {};
-    for (const card of $$('[data-gift]')) {
-      const info = gift[card.getAttribute('data-gift')];
-      const btn = $('[data-copy]', card);
-      if (!info || !info.account || !btn) continue;
-      $('.wed-gift-account', card).textContent = [info.bank, info.account].filter(Boolean).join(' · ');
-      btn.disabled = false;
-      const label = btn.textContent;
-      btn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(info.account);
-          btn.textContent = 'Đã sao chép';
-        } catch (e) {
-          btn.textContent = info.account;
-        }
-        setTimeout(() => { btn.textContent = label; }, 1800);
-      });
-    }
   }
 
   /* ===== Album ring: the photos stand on a ring that turns slowly and without stopping.

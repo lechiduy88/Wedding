@@ -65,11 +65,5 @@ window.WEDDING_CONFIG = {
     'nha-trai': 'https://www.google.com/maps?q=21.53266352099579,105.23380318498212',
     // Nhà gái — khu 41 Vân Đồn, xã Chân Mộng, Phú Thọ
     'nha-gai': 'https://www.google.com/maps?q=21.566778,105.211667'
-  },
-
-  // Bank accounts for wedding gifts. An empty account keeps the "to be updated" text.
-  gift: {
-    groom: { bank: '', account: '' },
-    bride: { bank: '', account: '' }
   }
 };
