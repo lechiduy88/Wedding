@@ -1143,6 +1143,165 @@
     return { available: true, play };
   })();
 
+  /* ===== Opening curtains, drawn on a canvas so the cloth can move like cloth =====
+     Each curtain is a row of folds hanging from the rod. Opening gathers the folds towards the outer edge:
+     the bottom middle is drawn aside first and every strip higher up follows a little later, so the fold
+     lines curve the way real drapes do when swept back, bunch (and darken) as they gather, ripple slightly
+     while moving, and cast a soft shadow on the page that shows through behind them. */
+  function initDrapes(intro) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext && canvas.getContext('2d');
+    if (!ctx) return null;
+    canvas.className = 'wed-drapes';
+    canvas.setAttribute('aria-hidden', 'true');
+    intro.prepend(canvas);
+
+    // Theme colours, resolved to plain rgb through a 1px paint (handles color-mix() and any colour syntax)
+    const rgb = (css, fallback) => {
+      const probe = document.createElement('span');
+      probe.style.color = css;
+      intro.append(probe);
+      const value = getComputedStyle(probe).color;
+      probe.remove();
+      const c = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+      c.fillStyle = fallback; c.fillStyle = value; c.fillRect(0, 0, 1, 1);
+      return Array.from(c.getImageData(0, 0, 1, 1).data.slice(0, 3));
+    };
+    const cloth = rgb('color-mix(in srgb, var(--wi-cloth) 64%, #fff)', '#e7c3c6');
+    const deep = rgb('var(--wed-primary-deep)', '#571e2c');
+    const col = (c, a) => 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')';
+    // The cloth colour pulled towards c by a share a, as an opaque colour
+    const tint = (c, a) => 'rgb(' + cloth.map((v, n) => Math.round(v + (c[n] - v) * a)).join(',') + ')';
+    const WHITE = [255, 255, 255];
+
+    let ROWS = 120;                                          // rows of cloth, about one per 4px of height
+    const GATHER = 0.13;                                     // gathered width, as a share of the resting width
+    const START = 150, LAG = 1050, RUN = 1900, FADE = 650;   // ms
+    const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    let W = 0, H = 0, half = 0, folds = 0, fw = 0, dpr = 1, rest = [];
+    // Real drapes never fall in equal folds: fixed, uneven widths (the same on every visit)
+    const unevenness = [1.15, 0.8, 1.3, 0.95, 0.7, 1.2, 1.05, 0.85, 1.25, 0.9, 1.1, 0.75, 1.3, 1, 0.85, 1.15];
+
+    const size = () => {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      half = W / 2 + 1;
+      ROWS = Math.round(Math.min(240, Math.max(120, H / 4)));
+      folds = Math.max(5, Math.round(half / Math.min(110, Math.max(44, W * 0.12))));
+      fw = half / folds;
+      // resting distance of each fold line from the outer edge
+      const widths = Array.from({ length: folds }, (_, j) => unevenness[j % unevenness.length]);
+      const total = widths.reduce((a, b) => a + b, 0);
+      rest = [0];
+      widths.forEach((w) => rest.push(rest[rest.length - 1] + w / total * half));
+    };
+
+    // Per row i: progress k[i] and height ys[i]; d[j][i]: distance of fold line j from the outer edge
+    const frame = (t) => {
+      const k = [], ys = [];
+      for (let i = 0; i <= ROWS; i++) {
+        const y = i / ROWS;
+        ys.push(y * H);
+        k.push(t <= 0 ? 0 : ease(Math.min(1, Math.max(0, (t - Math.pow(1 - y, 1.15) * LAG) / RUN))));
+      }
+      const d = [];
+      for (let j = 0; j <= folds; j++) {
+        d.push(k.map((ki, i) => {
+          // the cloth ripples a little while it is moving, most towards the free inner edge
+          const ripple = Math.sin(ys[i] / H * 7 + j * 0.9 + ki * 5) * fw * 0.9 * ki * (1 - ki) * (j / folds);
+          return rest[j] * (1 - ki * (1 - GATHER)) + ripple;
+        }));
+      }
+      return { k, ys, d };
+    };
+
+    // A band between two curves left(i) and right(i), filled with one colour
+    const band = (ys, left, right, fill) => {
+      ctx.beginPath();
+      for (let i = 0; i < ys.length; i++) i ? ctx.lineTo(left(i), ys[i]) : ctx.moveTo(left(i), ys[i]);
+      for (let i = ys.length - 1; i >= 0; i--) ctx.lineTo(right(i), ys[i]);
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.fill();
+    };
+
+    const side = (f, alpha) => {
+      const { k, ys, d } = f, edge = d[folds];
+      ctx.globalAlpha = alpha;
+      // Soft shadow the curtain casts on the page beside its inner edge
+      band(ys, (i) => edge[i], (i) => edge[i] + 26 * k[i], col(deep, 0.07));
+      band(ys, (i) => edge[i], (i) => edge[i] + 10 * k[i], col(deep, 0.09));
+      // The cloth itself, with every fold drawn inside its outline
+      ctx.save();
+      band(ys, () => -2, (i) => edge[i], col(cloth, 1));
+      ctx.clip();
+      // Each row of cloth is painted once, with one gradient that runs across all its folds: shadowed valley,
+      // lit crest, back into shadow. Rows are thin, so the shading follows the folds as they curve, and each
+      // row is as dark as the cloth is bunched at that height. Opaque colours, so rows join without seams.
+      for (let i = 0; i < ROWS; i++) {
+        const at = (j) => (d[j][i] + d[j][i + 1]) / 2;
+        const span = Math.max(2, at(folds) + 2);
+        const kk = (k[i] + k[i + 1]) / 2;
+        const dark = 0.14 + 0.34 * kk, light = 0.24 - 0.1 * kk;
+        const g = ctx.createLinearGradient(0, 0, span, 0);
+        let last = 0;
+        const stop = (x, c) => { last = Math.min(1, Math.max(last, x / span)); g.addColorStop(last, c); };
+        for (let j = 0; j < folds; j++) {
+          const x0 = at(j), w = at(j + 1) - x0;
+          const crest = 0.38 + 0.2 * ((j * 7) % 5) / 4;       // where the light catches varies a little
+          stop(x0, tint(deep, dark));
+          stop(x0 + w * crest * 0.45, tint(deep, dark * 0.35));
+          stop(x0 + w * crest, tint(WHITE, light));
+          stop(x0 + w * (crest + (1 - crest) * 0.55), tint(deep, dark * 0.25));
+        }
+        stop(span, tint(deep, dark));
+        ctx.fillStyle = g;
+        ctx.fillRect(-2, Math.floor(ys[i]), span + 4, Math.ceil(ys[i + 1] - ys[i]) + 1);
+      }
+      // Shade under the rod and towards the hem
+      const v = ctx.createLinearGradient(0, 0, 0, H);
+      v.addColorStop(0, col(deep, 0.3)); v.addColorStop(0.16, col(deep, 0));
+      v.addColorStop(0.8, col(deep, 0)); v.addColorStop(1, col(deep, 0.2));
+      ctx.fillStyle = v;
+      ctx.fillRect(-2, 0, half + 40, H);
+      ctx.restore();
+      // A thin lit hem along the inner edge
+      band(ys, (i) => edge[i] - 1.5, (i) => edge[i], 'rgba(255,255,255,.35)');
+      ctx.globalAlpha = 1;
+    };
+
+    const draw = (t) => {
+      const f = frame(t);
+      const end = LAG + RUN;
+      const alpha = t < end - FADE ? 1 : Math.max(0, (end - t) / FADE);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      side(f, alpha);                                         // left curtain
+      ctx.setTransform(-dpr, 0, 0, dpr, W * dpr, 0);          // right curtain: the same, mirrored
+      side(f, alpha);
+    };
+
+    size();
+    draw(0);
+    intro.classList.add('has-drapes');
+    const onResize = () => { size(); draw(0); };
+    addEventListener('resize', onResize);
+
+    return {
+      open(done) {
+        removeEventListener('resize', onResize);
+        const t0 = performance.now() + START;
+        const tick = (now) => {
+          const t = now - t0;
+          draw(t);
+          if (t < LAG + RUN) requestAnimationFrame(tick); else done();
+        };
+        requestAnimationFrame(tick);
+      }
+    };
+  }
+
   /* ===== Opening: two curtains. Tap the button (music on) or the quiet link; shown once per browser session. ===== */
   function initIntro() {
     const intro = $('#intro');
@@ -1153,6 +1312,7 @@
     scrollTo(0, 0);
     button.focus({ preventScroll: true });
     let opened = false;
+    const drapes = initDrapes(intro);
     const open = (withMusic) => {
       if (opened) return;
       opened = true;
@@ -1160,9 +1320,10 @@
       if (withMusic) music.play();
       if (reducedMotion) { root.classList.remove('intro-on'); return; }
       intro.classList.add('is-opening');
-      // The words fade, the curtains slide out and fade together (.3s delay + 1.7s); the hero rises meanwhile
-      setTimeout(() => root.classList.add('intro-reveal'), 350);
-      setTimeout(() => { root.classList.remove('intro-on', 'intro-reveal'); autoScroll.start(); }, 2200);
+      // The words drift away while the drapes part; the hero rises as soon as it starts to show
+      setTimeout(() => root.classList.add('intro-reveal'), 600);
+      const finish = () => { root.classList.remove('intro-on', 'intro-reveal'); autoScroll.start(); };
+      if (drapes) drapes.open(finish); else finish();
     };
     button.addEventListener('click', () => open(true));
     quiet.addEventListener('click', () => open(false));
