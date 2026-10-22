@@ -63,7 +63,7 @@ window.WEDDING_CONFIG = {
   maps: {
     // Nhà trai — thôn 21 Minh Phú, xã Chân Mộng, Phú Thọ
     'nha-trai': 'https://www.google.com/maps?q=21.53266352099579,105.23380318498212',
-    // Nhà gái — tư gia nhà gái
+    // Nhà gái — khu 41 Vân Đồn, xã Chân Mộng, Phú Thọ
     'nha-gai': 'https://www.google.com/maps?q=21.566778,105.211667'
   },
 

@@ -34,7 +34,7 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 ## 5. Lịch trình — "Hai buổi lễ, hai ngày"
 | Giờ | Ngày | Buổi | Bên | Địa điểm |
 |---|---|---|---|---|
-| 8:30 AM | Thứ Bảy 28/11/2026 | Lễ ăn hỏi | Nhà gái | Tư gia nhà gái, xã Chân Mộng, tỉnh Phú Thọ |
+| 8:30 AM | Thứ Bảy 28/11/2026 | Lễ ăn hỏi | Nhà gái | Tư gia nhà gái, khu 41 Vân Đồn, xã Chân Mộng, tỉnh Phú Thọ |
 | 10:00 AM | Chủ Nhật 29/11/2026 | **Lễ thành hôn** | Nhà trai | Tư gia nhà trai, thôn 21 Minh Phú, xã Chân Mộng, tỉnh Phú Thọ |
 
 Mỗi buổi có hai nút:
@@ -57,7 +57,7 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 ## 8. Chỉ đường — "Hai địa điểm"
 - Bản đồ Google Maps nhúng kèm nút "Mở Google Maps" cho:
   - Tư gia nhà trai, thôn 21 Minh Phú (Phú Thọ) ✅
-  - Tư gia nhà gái, xã Chân Mộng (Phú Thọ) ✅
+  - Tư gia nhà gái, khu 41 Vân Đồn, xã Chân Mộng (Phú Thọ) ✅
 - Tọa độ sửa ở `mapPoints`, link sửa ở `maps` trong `js/config.js`.
 
 ## 9. Sổ lưu bút — "Lời chúc của mọi người"
