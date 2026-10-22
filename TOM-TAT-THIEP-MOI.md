@@ -11,7 +11,7 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 - Hai tấm rèm nhung, giữa có dòng "Thiệp mời đám cưới", tên **Hoài Nam & Hà Lâm** ✅ và ngày **29 · 11 · 2026** ✅.
 - Nút **"Mở thiệp"**: rèm kéo ra và nhạc nền bắt đầu phát. Nút **"Mở thiệp không nhạc"**: mở mà không phát nhạc.
 - Màn rèm chỉ hiện một lần mỗi phiên trình duyệt.
-- Góc màn hình có nút tròn để bật/tắt nhạc. Bài hát nằm ở `assets/audio/song.mp3` ⚠️.
+- Góc màn hình có nút tròn để bật/tắt nhạc. Bài hát nằm ở `assets/audio/song.m4a` ⚠️.
 
 ## 2. Ảnh bìa
 - Dòng nhỏ "Thiệp mời · Lễ thành hôn", tên hai bạn ✅, ngày cưới ✅.
