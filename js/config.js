@@ -6,10 +6,10 @@ window.WEDDING_CONFIG = {
   // Shows the theme strip so guests can switch palettes. Set to false once a theme is final.
   showThemePicker: false,
 
-  // Opening curtains + background music (assets/audio/song.m4a). Guests start the song by tapping
+  // Opening curtains + background music (assets/audio/anh-bo-vai.m4a). Guests start the song by tapping
   // "Mở thiệp"; the round button in the corner turns it on and off. Set music.src to '' to drop the music.
   intro: true,
-  music: { src: 'assets/audio/song.m4a', volume: 0.55 },
+  music: { src: 'assets/audio/anh-bo-vai.m4a', volume: 0.55 },
 
   // After the invitation opens, the page scrolls down by itself at this speed (px per second).
   // It stops for good as soon as the guest scrolls, taps or presses a key. 0 turns it off.

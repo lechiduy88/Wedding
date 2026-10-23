@@ -36,7 +36,7 @@ without a backend.
 | `calendar/*.ics` | One calendar file per event (must keep CRLF line endings — see `.gitattributes`) |
 | `backend/Code.gs` | Apps Script that writes to the Google Sheet and serves the wish list |
 | `assets/photos/` | Wedding photos and QR codes under fixed names (`anh-bia`, `chu-re`, `co-dau`, `album-01`…, `qr-nha-trai`, `qr-nha-gai`, `chia-se.jpg`): see [`assets/photos/README.md`](assets/photos/README.md) |
-| `assets/audio/song.m4a` | Background music, started by the tap on the opening seal |
+| `assets/audio/anh-bo-vai.m4a` | Background music, started by the tap on the opening seal |
 
 ## Before sending the invitation
 
