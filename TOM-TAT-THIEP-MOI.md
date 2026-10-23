@@ -31,7 +31,13 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 | Ông | Nguyễn Hồng Minh ✅ | Nguyễn Xuân Quảng ✅ |
 | Bà | Nguyễn Thị Bảy ✅ | Nguyễn Thị Dần ✅ |
 
-## 5. Lịch trình — "Hai buổi lễ, hai ngày"
+## 5. Cuộn chỉ thời gian — "Từ ghét đến cưới" ✅
+- Câu dẫn: *"Hồi cấp 3 thề không đội trời chung. 11 năm sau, chung luôn sổ hộ khẩu."*
+- Một sợi chỉ chạy dọc trang, tự vẽ dần khi khách cuộn xuống. Sợi chỉ đi tới mốc nào thì nút ở mốc đó tô đậm; tới mốc cuối là trái tim đập.
+- Các mốc: **2013–2015** bạn cùng lớp cấp 3 · **2015** Nam tỏ tình · **2016** chính thức yêu nhau · **29/11/2026** về chung một nhà.
+- Sửa chữ trực tiếp trong `index.html` (phần `id="chuyen-tinh"`). Thêm mốc mới bằng cách chép thêm một khối `<li class="wed-thread-item">`.
+
+## 6. Lịch trình — "Hai buổi lễ, hai ngày"
 | Giờ | Ngày | Buổi | Bên | Địa điểm |
 |---|---|---|---|---|
 | 8:30 AM | Thứ Bảy 28/11/2026 | Lễ ăn hỏi | Nhà gái | Tư gia nhà gái, khu 41 Vân Đồn, xã Chân Mộng, tỉnh Phú Thọ |
@@ -43,29 +49,29 @@ Mỗi buổi có hai nút:
 
 Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong `index.html`, trong link Google Calendar và trong file `.ics` tương ứng.
 
-## 6. Album — "Những khoảnh khắc" ⚠️
+## 7. Album — "Những khoảnh khắc" ⚠️
 - 12 ảnh cưới (`album-01` … `album-12` ✅; số lượng đổi bằng `albumCount` trong `js/config.js`) xếp thành **vòng tròn xoay 3D**. Ảnh phía trước to và sáng nhất, các ảnh phía sau mờ dần. Mỗi ảnh có khung viền vàng trên nền ngà, bên dưới là một vòng ellipse ánh vàng.
 - Vòng quay đều và liên tục, khoảng 4,5 giây qua một ảnh, chỉ khi khách đang nhìn tới album. Khi khách rê chuột lên vòng ảnh thì vòng chậm dần rồi dừng.
 - Vuốt hoặc kéo để xoay. Thả tay ra thì vòng còn trôi theo đà rồi chậm dần về tốc độ thường. Có nút ‹ › và số thứ tự "01 — 12". Trên máy tính dùng được phím ← →.
 - Chạm ảnh bên cạnh (hoặc bấm ‹ ›) thì vòng tăng tốc rồi giảm tốc êm đưa ảnh đó ra trước, dừng khoảng 2,5 giây rồi quay tiếp. Chạm ảnh phía trước thì mở xem lớn (phóng to, vuốt sang ảnh khác).
 
-## 7. Hộp mừng cưới — "Gửi lời chúc từ xa" ⚠️
+## 8. Hộp mừng cưới — "Gửi lời chúc từ xa" ⚠️
 - Mã QR nằm trong một hộp quà; khách chạm vào hộp thì nắp bật lên và hai mã QR hiện ra.
 - Mỗi thẻ chỉ ghi "Nhà trai · Nguyễn Hoài Nam" / "Nhà gái · Nguyễn Hà Lâm" ✅, không ghi ngân hàng.
 - Ảnh QR: `qr-nha-trai.jpeg` (Hoài Nam, Techcombank) và `qr-nha-gai.jpeg` (Hà Lâm, Techcombank) ✅.
 
-## 8. Chỉ đường — "Hai địa điểm"
+## 9. Chỉ đường — "Hai địa điểm"
 - Bản đồ Google Maps nhúng kèm nút "Mở Google Maps" cho:
   - Tư gia nhà trai, thôn 21 Minh Phú (Phú Thọ) ✅
   - Tư gia nhà gái, khu 41 Vân Đồn, xã Chân Mộng (Phú Thọ) ✅
 - Tọa độ sửa ở `mapPoints`, link sửa ở `maps` trong `js/config.js`.
 
-## 9. Sổ lưu bút — "Lời chúc của mọi người"
+## 10. Sổ lưu bút — "Lời chúc của mọi người"
 - Lời chúc hiện thành dải cuộn vòng, có nút trái/phải.
 - Bên dưới là form gửi lời chúc: tên, mối quan hệ (gợi ý "Bạn đại học của Lâm" ✅), lời chúc, kèm các câu chúc mẫu.
 - Lời chúc lưu vào Google Sheet (tab `Wishes`) ✅, mọi khách đều thấy. Gõ `x` vào cột `Hidden` để ẩn một lời chúc.
 
-## 10. Chân trang
+## 11. Chân trang
 - "Hoài Nam & Hà Lâm" ✅ và dòng "29 · 11 · 2026 — Cảm ơn bạn đã ở bên chúng tôi!" ✅.
 
 ## Thành phần luôn có trên trang

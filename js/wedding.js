@@ -566,6 +566,35 @@
     box.hidden = false;
   }
 
+  /* ===== Love story thread: drawn down to the point 70% of the way down the screen,
+     lighting each knot it passes; it ends at the heart, not at the bottom of the list ===== */
+  function initThread() {
+    const list = $('#wed-thread');
+    if (!list) return;
+    const items = $$('.wed-thread-item', list);
+    const knots = items.map((li) => $('.wed-thread-knot', li));
+    let stops = [], raf = 0;
+    const measure = () => {
+      const last = knots[knots.length - 1];
+      const end = last.parentElement.offsetTop + last.offsetTop + last.offsetHeight / 2;
+      list.style.setProperty('--end', Math.max(0, list.offsetHeight - end) + 'px');
+      stops = knots.map((k) => (k.parentElement.offsetTop + k.offsetTop + k.offsetHeight / 2) / Math.max(1, end));
+      update();
+    };
+    const update = () => {
+      raf = 0;
+      const r = list.getBoundingClientRect();
+      const len = r.height - (parseFloat(list.style.getPropertyValue('--end')) || 0);
+      const p = reducedMotion ? 1 : Math.min(1, Math.max(0, (innerHeight * 0.7 - r.top) / Math.max(1, len)));
+      list.style.setProperty('--p', p.toFixed(4));
+      items.forEach((li, i) => li.classList.toggle('is-on', p >= stops[i] - 0.001));
+    };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    addEventListener('resize', measure, { passive: true });
+    addEventListener('load', measure);
+    measure();
+  }
+
   /* ===== Reveal on scroll ===== */
   function initReveal() {
     if (reducedMotion) return;
@@ -1474,6 +1503,7 @@
   initPresets();
   initCountdown();
   initMonthCalendar();
+  initThread();
   initReveal();
   initGuestbook();
   atm = initAtmosphere();
