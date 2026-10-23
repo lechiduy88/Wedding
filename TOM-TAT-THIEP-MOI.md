@@ -63,7 +63,7 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 ## 9. Sổ lưu bút — "Lời chúc của mọi người"
 - Lời chúc hiện thành dải cuộn vòng, có nút trái/phải.
 - Bên dưới là form gửi lời chúc: tên, mối quan hệ (gợi ý "Bạn đại học của Lâm" ✅), lời chúc, kèm các câu chúc mẫu.
-- Chưa có backend nên lời chúc chỉ lưu trong trình duyệt của từng khách ⚠️.
+- Lời chúc lưu vào Google Sheet (tab `Wishes`) ✅, mọi khách đều thấy. Gõ `x` vào cột `Hidden` để ẩn một lời chúc.
 
 ## 10. Chân trang
 - "Hoài Nam & Hà Lâm" ✅ và dòng "29 · 11 · 2026 — Cảm ơn bạn đã ở bên chúng tôi!" ✅.

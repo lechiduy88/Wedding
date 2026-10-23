@@ -30,7 +30,7 @@ window.WEDDING_CONFIG = {
   // Google Apps Script web app URL (ends with /exec) that stores RSVPs and wishes
   // in a Google Sheet — see backend/README.md. While this is empty the site runs in
   // demo mode: submissions are kept in the visitor's own browser only.
-  apiEndpoint: '',
+  apiEndpoint: 'https://script.google.com/macros/s/AKfycbwOxT_hCXP0d_CRadsitXprli0_zL_oWs1DwB6F26egFYA-CvI2nwkDAOWQ832d-cb1Xw/exec',
 
   // One-tap wishes offered above every wish box: the chip shows `label`, the box gets `text`
   wishPresets: [
