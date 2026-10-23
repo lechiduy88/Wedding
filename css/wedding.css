@@ -430,17 +430,15 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-giftbox.is-shaking .wed-giftbox-art{animation:wed-giftbox-shake .4s linear both}
 .wed-giftbox.is-opening .wed-giftbox-art{animation:none}
 .wed-giftbox.is-opening .wed-giftbox-lid{transform:translate(10px,-70px) rotate(28deg);opacity:0}
-.wed-giftbox.is-opening .wed-giftbox-body{transform:scale(.9);opacity:0}
+.wed-giftbox.is-open{cursor:default}
 .wed-giftbox.is-opening .wed-giftbox-hint,.wed-giftbox.is-opening .wed-giftbox-spark{opacity:0}
 .wed-giftbox.is-opening .wed-giftbox-glow{transform:translate(-50%,-50%) scale(2.2);opacity:0;animation:none}
 .wed-giftbox.is-opening .wed-giftbox-rays{opacity:0}
 .wed-burst{position:absolute;left:50%;width:0;height:0;pointer-events:none;z-index:2}
 .wed-burst i{position:absolute;left:0;top:0;width:8px;height:12px;border-radius:2px;background:var(--c);font-style:normal;animation:wed-burst 1.3s cubic-bezier(.12,.75,.3,1) var(--t,0s) both}
 .wed-burst i.is-heart{width:auto;height:auto;background:none;color:var(--c);font-size:var(--s,16px);line-height:1}
-/* QR cards pop up one after the other, and their frames shimmer once */
-.wed-gift-grid.is-open .wed-gift-card{animation:wed-gift-pop .8s cubic-bezier(.2,1.3,.4,1) both}
-.wed-gift-grid.is-open .wed-gift-card:nth-child(2){animation-delay:.18s}
-.wed-gift-grid.is-open .wed-slot--qr{animation:wed-gift-shine 1.6s ease .5s both}
+/* Once landed, the QR frames shimmer */
+.wed-gift-grid.is-open .wed-slot--qr{animation:wed-gift-shine 1.6s ease 1.3s both}
 @keyframes wed-giftbox-wiggle{0%,62%,100%{transform:none}68%{transform:rotate(-6deg) scale(1.03)}74%{transform:rotate(6deg) scale(1.03)}80%{transform:rotate(-4deg)}86%{transform:rotate(3deg)}92%{transform:rotate(-1deg)}}
 @keyframes wed-giftbox-shake{0%,100%{transform:none}20%{transform:rotate(-7deg) translateX(-3px)}40%{transform:rotate(7deg) translateX(3px)}60%{transform:rotate(-5deg)}80%{transform:rotate(5deg) scale(1.05)}}
 @keyframes wed-giftbox-spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
@@ -448,9 +446,8 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 @keyframes wed-giftbox-twinkle{0%,100%{transform:scale(.3) rotate(0);opacity:0}50%{transform:scale(1) rotate(45deg);opacity:1}}
 @keyframes wed-giftbox-ripple{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.25,1.6);opacity:0}}
 @keyframes wed-burst{0%{transform:translate(-50%,-50%) scale(.3) rotate(0);opacity:1}75%{opacity:1}100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1) rotate(var(--r));opacity:0}}
-@keyframes wed-gift-pop{0%{opacity:0;transform:translateY(30px) scale(.85)}100%{opacity:1;transform:none}}
 @keyframes wed-gift-shine{0%{box-shadow:0 0 0 5px var(--color-bg),0 0 0 6px var(--color-accent-2),0 0 0 6px color-mix(in srgb,var(--wed-accent) 60%,transparent)}100%{box-shadow:0 0 0 5px var(--color-bg),0 0 0 6px var(--color-accent-2),0 0 0 26px transparent}}
-@media (prefers-reduced-motion:reduce){.wed-giftbox-art,.wed-giftbox-rays,.wed-giftbox-glow,.wed-giftbox-spark,.wed-giftbox-hint svg,.wed-giftbox-hint::after,.wed-gift-grid.is-open .wed-gift-card,.wed-gift-grid.is-open .wed-slot--qr{animation:none}.wed-giftbox-lid{transition:none}}
+@media (prefers-reduced-motion:reduce){.wed-giftbox-art,.wed-giftbox-rays,.wed-giftbox-glow,.wed-giftbox-spark,.wed-giftbox-hint svg,.wed-giftbox-hint::after,.wed-gift-grid.is-open .wed-slot--qr{animation:none}.wed-giftbox-lid{transition:none}}
 
 /* ===== Directions ===== */
 .wed-place{text-align:center}

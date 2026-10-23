@@ -320,10 +320,37 @@
     const box = $('#gift-box');
     const grid = $('#gift-grid');
     if (box && grid) {
+      // The open box stays; each QR card leaps out of its mouth, arcs up and lands in its place below
       const reveal = () => {
-        box.hidden = true;
+        box.classList.add('is-open');
+        box.disabled = true;
         grid.classList.add('is-open');
-        grid.focus({ preventScroll: true });
+        const cards = $$('.wed-gift-card', grid);
+        for (const card of cards) card.classList.add('wed-in');
+        if (reducedMotion || !cards[0].animate) { grid.focus({ preventScroll: true }); return; }
+        const art = $('.wed-giftbox-art', box).getBoundingClientRect();
+        const mouthX = art.left + art.width / 2;
+        const mouthY = art.top + art.height * 0.55;
+        let last;
+        cards.forEach((card, i) => {
+          const r = card.getBoundingClientRect();
+          const dx = mouthX - (r.left + r.width / 2);
+          const dy = mouthY - (r.top + r.height / 2);
+          const side = (i % 2 ? 1 : -1) * Math.min(90, innerWidth * 0.16);
+          card.style.position = 'relative';
+          card.style.zIndex = 3;
+          last = card.animate([
+            { transform: `translate(${dx}px,${dy}px) scale(.08) rotate(0deg)`, opacity: 0, easing: 'cubic-bezier(.2,.8,.4,1)' },
+            { offset: 0.12, opacity: 1 },
+            { offset: 0.45, transform: `translate(${dx * 0.55 + side}px,${dy - 170}px) scale(.55) rotate(${i % 2 ? 8 : -8}deg)`, easing: 'cubic-bezier(.5,0,.6,1)' },
+            { transform: 'none', opacity: 1 }
+          ], { duration: 1300, delay: i * 180, fill: 'backwards' });
+        });
+        last.finished.then(() => {
+          for (const card of cards) { card.style.position = ''; card.style.zIndex = ''; }
+          grid.focus({ preventScroll: true });
+          grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
       };
       // Confetti and hearts fly out of the box in every direction, then fall away
       const burst = () => {
@@ -359,7 +386,7 @@
           box.classList.add('is-opening');
           burst();
         }, 400);
-        setTimeout(reveal, 1250);
+        setTimeout(reveal, 750);
       }, { once: true });
     }
   }
