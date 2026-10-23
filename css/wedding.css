@@ -327,24 +327,29 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-thread::before,.wed-thread::after{content:"";position:absolute;left:50%;top:6px;bottom:var(--end,8px);width:2px;margin-left:-1px;border-radius:2px}
 .wed-thread::before{background:var(--color-divider)}
 .wed-thread::after{background:var(--wed-primary);transform-origin:top;transform:scaleY(var(--p))}
-.wed-thread-item{position:relative;width:50%;padding:0 clamp(28px,4vw,52px) clamp(30px,4vw,48px) 0;text-align:right}
-.wed-thread-item:nth-child(even){margin-left:50%;padding-right:0;padding-left:clamp(28px,4vw,52px);text-align:left}
+/* Each milestone spans both sides of the thread: words on one side, its photos facing them on the other */
+.wed-thread-item{--gap:clamp(28px,4vw,52px);position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto 1fr;column-gap:calc(var(--gap) * 2);padding-bottom:clamp(36px,5vw,60px);text-align:right}
+.wed-thread-item > :not(.wed-thread-knot){grid-column:1}
+.wed-thread-item > .wed-thread-photos{grid-column:2;grid-row:1 / -1}
+.wed-thread-item:nth-child(even){text-align:left}
+.wed-thread-item:nth-child(even) > :not(.wed-thread-knot){grid-column:2}
+.wed-thread-item:nth-child(even) > .wed-thread-photos{grid-column:1}
 .wed-thread-item:last-child{padding-bottom:0}
-.wed-thread-knot{position:absolute;top:4px;right:calc(var(--knot) / -2);width:var(--knot);height:var(--knot);border-radius:50%;border:2px solid var(--wed-primary);background:var(--wed-primary);box-sizing:border-box;transition:background-color .5s ease,transform .5s ease}
-.wed-thread-item:nth-child(even) .wed-thread-knot{right:auto;left:calc(var(--knot) / -2)}
+.wed-thread-knot{position:absolute;top:4px;left:calc(50% - var(--knot) / 2);width:var(--knot);height:var(--knot);border-radius:50%;border:2px solid var(--wed-primary);background:var(--wed-primary);box-sizing:border-box;transition:background-color .5s ease,transform .5s ease}
 .js .wed-thread-item:not(.is-on) .wed-thread-knot{background:var(--color-bg);transform:scale(.8)}
 .wed-thread-item--end .wed-thread-knot{--knot:30px;top:-3px;border:0;background:none!important;display:flex}
 .wed-thread-knot svg{width:100%;height:100%;fill:var(--wed-primary);transition:fill .5s ease}
 .js .wed-thread-item--end:not(.is-on) .wed-thread-knot svg{fill:var(--color-divider)}
 .wed-thread-item--end.is-on .wed-thread-knot svg{animation:wed-heart-beat 1.6s ease-in-out infinite}
 .wed-thread-year{font-family:var(--font-heading);font-size:clamp(24px,2.6vw,34px);line-height:1;font-feature-settings:'tnum' 1;color:var(--wed-primary);margin:0}
-.wed-thread-title{font-family:var(--font-heading);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.25;margin:10px 0 8px}
-.wed-thread-text{font-size:15.5px;line-height:1.65;color:var(--wed-soft);margin:0 0 0 auto;max-width:38ch}
+.wed-thread-year{grid-row:1}
+.wed-thread-title{grid-row:2;font-family:var(--font-heading);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.25;margin:10px 0 8px}
+.wed-thread-text{grid-row:3;font-size:15.5px;line-height:1.65;color:var(--wed-soft);margin:0 0 0 auto;max-width:38ch}
 .wed-thread-item:nth-child(even) .wed-thread-text{margin:0 auto 0 0}
 /* Photos sit under each milestone like snapshots pinned to the thread: a pale border and a slight tilt */
-.wed-thread-photos{display:flex;justify-content:flex-end;gap:clamp(10px,1.6vw,16px);margin-top:clamp(18px,2.4vw,26px)}
-.wed-thread-item:nth-child(even) .wed-thread-photos{justify-content:flex-start}
-.wed-thread-photo{--tilt:2deg;margin:0;width:min(260px,100%);padding:7px 7px 9px;background:color-mix(in srgb,#fff 82%,var(--wed-background));box-shadow:0 1px 2px color-mix(in srgb,var(--wed-primary-deep) 14%,transparent),0 16px 32px -18px color-mix(in srgb,var(--wed-primary-deep) 50%,transparent);transform:rotate(var(--tilt));transition:transform .35s ease}
+.wed-thread-photos{display:flex;align-items:flex-start;justify-content:flex-start;gap:clamp(10px,1.6vw,16px)}
+.wed-thread-item:nth-child(even) .wed-thread-photos{justify-content:flex-end}
+.wed-thread-photo{--tilt:2deg;margin:0;width:min(230px,100%);padding:7px 7px 9px;background:color-mix(in srgb,#fff 82%,var(--wed-background));box-shadow:0 1px 2px color-mix(in srgb,var(--wed-primary-deep) 14%,transparent),0 16px 32px -18px color-mix(in srgb,var(--wed-primary-deep) 50%,transparent);transform:rotate(var(--tilt));transition:transform .35s ease}
 .wed-thread-item:nth-child(even) .wed-thread-photo{--tilt:-2deg}
 .wed-thread-photo--wide{width:min(340px,100%)}
 .wed-thread-photos--pair .wed-thread-photo{width:min(190px,calc(50% - 8px))}
@@ -353,13 +358,13 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 @media (hover:hover){.wed-thread-photo:has(.is-zoomable):hover{transform:rotate(0) translateY(-3px)}}
 @media (max-width:640px){
   .wed-thread::before,.wed-thread::after{left:15px}
-  .wed-thread-item,.wed-thread-item:nth-child(even){width:auto;margin-left:0;padding:0 0 32px 44px;text-align:left}
+  .wed-thread-item,.wed-thread-item:nth-child(even){display:block;padding:0 0 32px 44px;text-align:left}
   .wed-thread-item:last-child{padding-bottom:0}
-  .wed-thread-item .wed-thread-knot,.wed-thread-item:nth-child(even) .wed-thread-knot{right:auto;left:calc(15px - var(--knot) / 2)}
+  .wed-thread-knot{left:calc(15px - var(--knot) / 2)}
   .wed-thread-text,.wed-thread-item:nth-child(even) .wed-thread-text{margin:0}
-  .wed-thread-photos,.wed-thread-item:nth-child(even) .wed-thread-photos{justify-content:flex-start}
-  .wed-thread-photo{width:min(240px,100%)}
-  .wed-thread-photo--wide{width:min(300px,100%)}
+  .wed-thread-photos,.wed-thread-item:nth-child(even) .wed-thread-photos{justify-content:flex-start;margin-top:18px}
+  .wed-thread-photo{width:min(210px,100%)}
+  .wed-thread-photo--wide{width:min(290px,100%)}
 }
 @media (prefers-reduced-motion:reduce){.wed-thread-knot,.wed-thread-knot svg{transition:none}.wed-thread-item--end.is-on .wed-thread-knot svg{animation:none}.wed-thread-photo{transition:none}}
 
