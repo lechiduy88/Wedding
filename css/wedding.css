@@ -341,14 +341,27 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-thread-title{font-family:var(--font-heading);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.25;margin:10px 0 8px}
 .wed-thread-text{font-size:15.5px;line-height:1.65;color:var(--wed-soft);margin:0 0 0 auto;max-width:38ch}
 .wed-thread-item:nth-child(even) .wed-thread-text{margin:0 auto 0 0}
+/* Photos sit under each milestone like snapshots pinned to the thread: a pale border and a slight tilt */
+.wed-thread-photos{display:flex;justify-content:flex-end;gap:clamp(10px,1.6vw,16px);margin-top:clamp(18px,2.4vw,26px)}
+.wed-thread-item:nth-child(even) .wed-thread-photos{justify-content:flex-start}
+.wed-thread-photo{--tilt:2deg;margin:0;width:min(260px,100%);padding:7px 7px 9px;background:color-mix(in srgb,#fff 82%,var(--wed-background));box-shadow:0 1px 2px color-mix(in srgb,var(--wed-primary-deep) 14%,transparent),0 16px 32px -18px color-mix(in srgb,var(--wed-primary-deep) 50%,transparent);transform:rotate(var(--tilt));transition:transform .35s ease}
+.wed-thread-item:nth-child(even) .wed-thread-photo{--tilt:-2deg}
+.wed-thread-photo--wide{width:min(340px,100%)}
+.wed-thread-photos--pair .wed-thread-photo{width:min(190px,calc(50% - 8px))}
+.wed-thread-photos--pair .wed-thread-photo:first-child{--tilt:-3deg}
+.wed-thread-photos--pair .wed-thread-photo:last-child{--tilt:2.5deg;margin-top:18px}
+@media (hover:hover){.wed-thread-photo:has(.is-zoomable):hover{transform:rotate(0) translateY(-3px)}}
 @media (max-width:640px){
   .wed-thread::before,.wed-thread::after{left:15px}
   .wed-thread-item,.wed-thread-item:nth-child(even){width:auto;margin-left:0;padding:0 0 32px 44px;text-align:left}
   .wed-thread-item:last-child{padding-bottom:0}
   .wed-thread-item .wed-thread-knot,.wed-thread-item:nth-child(even) .wed-thread-knot{right:auto;left:calc(15px - var(--knot) / 2)}
   .wed-thread-text,.wed-thread-item:nth-child(even) .wed-thread-text{margin:0}
+  .wed-thread-photos,.wed-thread-item:nth-child(even) .wed-thread-photos{justify-content:flex-start}
+  .wed-thread-photo{width:min(240px,100%)}
+  .wed-thread-photo--wide{width:min(300px,100%)}
 }
-@media (prefers-reduced-motion:reduce){.wed-thread-knot,.wed-thread-knot svg{transition:none}.wed-thread-item--end.is-on .wed-thread-knot svg{animation:none}}
+@media (prefers-reduced-motion:reduce){.wed-thread-knot,.wed-thread-knot svg{transition:none}.wed-thread-item--end.is-on .wed-thread-knot svg{animation:none}.wed-thread-photo{transition:none}}
 
 /* ===== Schedule ===== */
 .wed-tl-row{display:grid;grid-template-columns:minmax(120px,168px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:start;padding:clamp(22px,3vw,34px) 0;border-top:1px solid var(--color-divider)}
