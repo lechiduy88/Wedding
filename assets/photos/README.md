@@ -12,7 +12,7 @@ Thiệp tự nhận ảnh, không cần sửa code.
 | Ảnh bìa (đầu trang) | `anh-bia` | dọc, khoảng 4:5 |
 | Ảnh chú rể (phần Hai gia đình) | `chu-re` | dọc 2:3 |
 | Ảnh cô dâu (phần Hai gia đình) | `co-dau` | dọc 2:3 |
-| Ảnh các mốc trong Cuộn chỉ thời gian | `chuyen-tinh-01` … `chuyen-tinh-05` | 3:4, 2:3, 4:3 tùy mốc |
+| Ảnh các mốc trong Cuộn chỉ thời gian | `chuyen-tinh-01`, `03`, `04`, `05` (mỗi mốc một ảnh) | 3:4, 4:3, 2:3 tùy mốc |
 | Album vòng xoay | `album-01`, `album-02`, … `album-12` | dọc 2:3 |
 | Mã QR mừng cưới nhà trai | `qr-nha-trai` | dọc 5:7 |
 | Mã QR mừng cưới nhà gái | `qr-nha-gai` | dọc 5:7 |

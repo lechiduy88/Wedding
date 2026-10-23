@@ -35,7 +35,7 @@ Khách chạm hoặc cuộn bất cứ lúc nào thì trang dừng tự trôi đ
 - Câu dẫn: *"Hồi cấp 3 thề không đội trời chung. 11 năm sau, chung luôn sổ hộ khẩu."*
 - Một sợi chỉ chạy dọc trang, tự vẽ dần khi khách cuộn xuống. Sợi chỉ đi tới mốc nào thì nút ở mốc đó tô đậm; tới mốc cuối là trái tim đập.
 - Các mốc: **2013–2015** bạn cùng lớp cấp 3 · **2015** Nam tỏ tình · **2016** chính thức yêu nhau · **29/11/2026** về chung một nhà.
-- Mỗi mốc có ảnh kiểu polaroid hơi nghiêng, chạm vào để xem lớn: `chuyen-tinh-01`, `02` (cấp 3) · `03` (tỏ tình) · `04` (yêu nhau) · `05` (về chung nhà) ✅.
+- Mỗi mốc có ảnh kiểu polaroid hơi nghiêng, chạm vào để xem lớn: `chuyen-tinh-01` (cấp 3) · `03` (tỏ tình) · `04` (yêu nhau) · `05` (về chung nhà) ✅.
 - Sửa chữ trực tiếp trong `index.html` (phần `id="chuyen-tinh"`). Thêm mốc mới bằng cách chép thêm một khối `<li class="wed-thread-item">`.
 
 ## 6. Lịch trình — "Hai buổi lễ, hai ngày"
