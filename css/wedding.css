@@ -1,6 +1,11 @@
 /* Hoài Nam & Hà Lâm wedding invitation — page styles.
    Base tokens and components live in classical.css; this file adds the themes and the layout. */
 
+/* Couple's names: Boheme Floral (50Fox), with an added ễ for "Nguyễn". Always served from assets/fonts/:
+   a copy installed on the guest's machine would lack that letter. */
+@font-face{font-family:"Boheme Floral";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../assets/fonts/boheme-floral.woff2") format("woff2")}
+
 /* Five palettes. Each one only declares the semantic --wed-* variables, which are then
    mapped onto design-system tokens, so no component hard-codes a colour. */
 :root,[data-wed-theme="hien-dai"]{
@@ -152,7 +157,7 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-panel{border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:clamp(22px,3vw,36px)}
 
 /* Couple names: a calligraphic script face that supports Vietnamese diacritics */
-.wed-name{font-family:"Great Vibes","Dancing Script",var(--font-heading),cursive;font-weight:400;letter-spacing:.01em;line-height:1.16;white-space:nowrap}
+.wed-name{font-family:"Boheme Floral","Great Vibes","Dancing Script",var(--font-heading),cursive;font-weight:400;letter-spacing:.01em;line-height:1.16;white-space:nowrap}
 .wed-amp{font-family:"Great Vibes",var(--font-heading),cursive;font-style:normal;color:var(--color-accent-2)}
 
 /* Photo slot: shows the image set in js/config.js, or a placeholder frame until there is one */
@@ -312,6 +317,7 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-person{text-align:center;container-type:inline-size}
 .wed-person .wed-label{margin-bottom:18px}
 .wed-person figure{margin:0 0 22px;width:100%}
+.wed-gift-card .wed-name{font-size:32px;margin:0}
 .wed-person .wed-name{font-size:min(13cqw,46px);margin:0 0 10px}
 .wed-person-role{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 60%,transparent);margin:0 0 22px}
 .wed-person .hr{margin:0 0 18px}
