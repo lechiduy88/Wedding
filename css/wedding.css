@@ -43,8 +43,8 @@
 [data-wed-theme="rose"]{
   /* Dusty Rose · Burgundy · Cream — romantic, slightly vintage */
   --font-heading:"EB Garamond",Garamond,serif;
-  --font-body:"Be Vietnam Pro",system-ui,sans-serif;
-  --font-heading-weight:500;--wed-body-weight:300;--wed-h-space:-.004em;
+  --font-body:"EB Garamond",Garamond,serif;
+  --font-heading-weight:500;--wed-body-weight:400;--wed-h-space:-.004em;
   --wed-background:#faf4ee;--wed-surface:#efdcd4;
   --wed-primary:#6b2737;--wed-secondary:#e8d9cf;--wed-accent:#c08f84;
   --wed-text:#3b2d2d;
@@ -266,7 +266,7 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-lb-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;font-size:13px;letter-spacing:.06em}
 .wed-lb-bar--top{position:absolute;top:0;left:0;right:0;z-index:2;background:linear-gradient(to bottom,rgba(0,0,0,.45),transparent)}
 .wed-lb-bar--bottom{justify-content:center;gap:8px;padding-bottom:max(12px,env(safe-area-inset-bottom))}
-.wed-lb-caption{margin:0;font-family:var(--font-heading);font-style:italic;font-size:15px;opacity:.9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wed-lb-caption{margin:0;font-family:var(--font-heading);font-size:15px;opacity:.9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wed-lb-count{margin:0;opacity:.75;font-feature-settings:'tnum' 1}
 .wed-lb-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font:500 18px/1 var(--font-body);cursor:pointer;transition:background-color .2s ease}
 .wed-lb-btn:hover{background:rgba(255,255,255,.2)}
@@ -298,7 +298,7 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-cd-sec{animation:wed-tick 1s steps(1,end) infinite}
 @keyframes wed-tick{0%,55%{opacity:1}72%{opacity:.62}100%{opacity:1}}
 @media (prefers-reduced-motion:reduce){.wed-cd-sec{animation:none}}
-.wed-cd-place{font-family:var(--font-heading);font-style:italic;font-size:clamp(15px,1.7vw,19px);line-height:1.6;color:color-mix(in srgb,var(--color-text) 72%,transparent);margin:clamp(22px,3vw,30px) 0 0}
+.wed-cd-place{font-family:var(--font-heading);font-size:clamp(15px,1.7vw,19px);line-height:1.6;color:color-mix(in srgb,var(--color-text) 72%,transparent);margin:clamp(22px,3vw,30px) 0 0}
 /* Month sheet under the countdown */
 .wed-month{max-width:340px;margin:clamp(28px,4vw,40px) auto 0}
 .wed-month-title{font-family:var(--font-heading);font-size:clamp(18px,2vw,22px);letter-spacing:.06em;margin:0 0 14px}
@@ -327,7 +327,7 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 
 /* ===== Love story: milestones strung on a thread that fills in as the guest scrolls (initThread in wedding.js)
    --p is how much of the thread is drawn, 0–1; a knot turns solid once the thread reaches it (.is-on) */
-.wed-story-lead{font-family:var(--font-heading);font-style:italic;font-size:clamp(18px,2vw,22px);line-height:1.5;color:var(--wed-soft);max-width:42ch;text-wrap:balance;margin-bottom:clamp(36px,5vw,60px)}
+.wed-story-lead{font-family:var(--font-heading);font-size:clamp(18px,2vw,22px);line-height:1.5;color:var(--wed-soft);max-width:42ch;text-wrap:balance;margin-bottom:clamp(36px,5vw,60px)}
 .wed-thread{--p:1;--knot:16px;position:relative;list-style:none;max-width:900px;margin:0 auto;padding:0}
 .js .wed-thread{--p:0}
 .wed-thread::before,.wed-thread::after{content:"";position:absolute;left:50%;top:6px;bottom:var(--end,8px);width:2px;margin-left:-1px;border-radius:2px}
@@ -525,7 +525,7 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-wishes > .card{flex:0 0 100%;scroll-snap-align:start;justify-content:center;min-height:clamp(200px,26vw,280px);text-align:center;padding:clamp(8px,1.5vw,16px) 0;gap:0;border:0;border-radius:0}
 /* The opening quote mark hangs above the wish like a small ornament */
 .wed-wishes > .card::before{content:"“";display:block;font-family:var(--font-heading);font-size:clamp(64px,8vw,96px);line-height:.55;height:.45em;color:var(--color-accent);opacity:.55;margin-bottom:clamp(14px,2vw,22px)}
-.wed-wish{font-family:var(--font-heading);font-style:italic;font-size:clamp(21px,2.7vw,31px);line-height:1.5;color:var(--color-text);margin:0;text-wrap:balance}
+.wed-wish{font-family:var(--font-heading);font-size:clamp(21px,2.7vw,31px);line-height:1.5;color:var(--color-text);margin:0;text-wrap:balance}
 /* Name with a short rule before it, relation underneath in small caps */
 .wed-wishes .card-title{display:flex;align-items:center;justify-content:center;gap:12px;margin:clamp(20px,3vw,32px) 0 0;font-size:17px;letter-spacing:.02em}
 .wed-wishes .card-title::before{content:"";width:28px;height:1px;background:var(--color-accent);opacity:.7}
@@ -536,7 +536,7 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-wish-prev{grid-area:prev}
 .wed-wish-next{grid-area:next}
 .wed-wish-count{grid-area:count;margin:0;text-align:center;font-size:12px;letter-spacing:.14em;color:var(--wed-soft)}
-.wed-wish-status{grid-area:status;font-family:var(--font-heading);font-style:italic;font-size:17px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 65%,transparent);margin:0;text-align:center}
+.wed-wish-status{grid-area:status;font-family:var(--font-heading);font-size:17px;line-height:1.6;color:color-mix(in srgb,var(--color-text) 65%,transparent);margin:0;text-align:center}
 .wed-wishes:not(:empty) ~ .wed-wish-status{display:none}
 @media (max-width:640px){
   .wed-wishes-strip{grid-template-columns:44px minmax(0,1fr) 44px;grid-template-areas:"list list list" "prev count next" "status status status";column-gap:16px}

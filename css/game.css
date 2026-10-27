@@ -39,7 +39,7 @@
 .wed-game-list{list-style:none;max-width:460px;margin:0 auto;padding:0;display:grid;gap:6px}
 .wed-game-li{display:flex;align-items:center;gap:14px;padding:11px 16px;border:1px solid var(--color-divider);border-radius:var(--radius-md);background:color-mix(in srgb,var(--color-bg) 70%,transparent)}
 .wed-game-li.is-me{border-color:var(--color-accent);background:var(--color-accent-100)}
-.wed-game-empty{padding:18px 16px;text-align:center;font-family:var(--font-heading);font-style:italic;color:var(--wed-soft)}
+.wed-game-empty{padding:18px 16px;text-align:center;font-family:var(--font-heading);color:var(--wed-soft)}
 .wed-game-rank{width:22px;font-family:var(--font-heading);font-size:18px;color:var(--color-accent-700)}
 .wed-game-who{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wed-game-pts{font-variant-numeric:tabular-nums;font-weight:500}
@@ -56,7 +56,7 @@
 .wed-game-lure i::after{right:1px;bottom:8px;font-size:7px;animation-delay:.9s}
 /* Petals popped before the game is found count up quietly */
 .wed-game-float{position:fixed;z-index:55;margin:-26px 0 0 -14px;pointer-events:none;font-family:var(--font-heading);font-size:18px;color:var(--wed-accent-deep,var(--wed-accent));text-shadow:0 0 6px var(--wed-background),0 0 2px var(--wed-background);animation:wed-game-float 1.1s ease-out forwards}
-.wed-game-whisper{position:fixed;left:50%;bottom:24px;z-index:45;width:max-content;max-width:calc(100vw - 32px);margin:0;padding:8px 16px;transform:translateX(-50%);pointer-events:none;font-family:var(--font-heading);font-style:italic;font-size:14.5px;text-align:center;color:var(--color-text);background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:blur(6px);border-radius:100px;animation:wed-game-whisper 7s ease forwards}
+.wed-game-whisper{position:fixed;left:50%;bottom:24px;z-index:45;width:max-content;max-width:calc(100vw - 32px);margin:0;padding:8px 16px;transform:translateX(-50%);pointer-events:none;font-family:var(--font-heading);font-size:14.5px;text-align:center;color:var(--color-text);background:color-mix(in srgb,var(--color-bg) 88%,transparent);backdrop-filter:blur(6px);border-radius:100px;animation:wed-game-whisper 7s ease forwards}
 @media (max-width:860px){.wed-game-whisper{bottom:calc(92px + env(safe-area-inset-bottom))}}
 
 /* Lab switcher (prototype only) */
