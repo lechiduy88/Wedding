@@ -87,4 +87,4 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 1. **Backend:** đã nối Google Sheet ✅ (`apiEndpoint` trong `js/config.js`). Sửa `Code.gs` thì triển khai lại bằng "Quản lý các bản triển khai → Phiên bản mới" để giữ nguyên link.
 2. **Ảnh:** đã có ảnh bìa, chú rể, cô dâu, 12 ảnh album, 2 mã QR và ảnh chia sẻ ✅. Ảnh gốc nằm trong `WeddingPictures/` (không đưa lên git).
 3. **Ngày, giờ, địa điểm, tên bố mẹ:** đã cập nhật ✅. Khi đổi, sửa cùng lúc trong `index.html`, các file `calendar/*.ics` và `js/config.js`.
-4. **Địa chỉ web:** `https://lechiduy88.github.io/Wedding/` (bật GitHub Pages cho repo). Có tên miền riêng thì thêm file `CNAME` và sửa link xem trước trong `index.html`.
+4. **Địa chỉ web:** `https://weddingnl.vercel.app/` (Vercel) ✅. Ảnh hiện dưới link khi gửi qua Zalo/Messenger lấy từ các thẻ `og:image`, `og:url`, `twitter:image` trong `index.html`; đổi địa chỉ web thì sửa cả các thẻ này.

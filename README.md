@@ -53,10 +53,9 @@ without a backend.
 6. **Event times** — if a time or venue changes, update it in `index.html` (schedule, RSVP options,
    Google Calendar links) and in the matching `calendar/*.ics` file.
 
-## Deploy to GitHub Pages
+## Deploy
 
-Repo **Settings → Pages → Deploy from a branch → `master` / `(root)`**. The site is then served at
-`https://lechiduy88.github.io/Wedding/`. GitHub Pages on a free plan needs a public repo.
+The site is served on Vercel at `https://weddingnl.vercel.app/`.
 
-The link preview (`og:url`, `og:image` in `index.html`) uses that address. With a custom domain later, add a `CNAME`
-file holding the domain, point its DNS at GitHub Pages, and update those two tags.
+The link preview shown under the link in Zalo/Messenger/Facebook (`og:url`, `og:image`, `twitter:image` in
+`index.html`) must use that full address. If the site moves to another address, update those tags too.
