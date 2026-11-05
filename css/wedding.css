@@ -156,8 +156,8 @@ h1,h2,h3,blockquote{letter-spacing:var(--wed-h-space,0)}
 .wed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:clamp(22px,4vw,44px)}
 .wed-panel{border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:clamp(22px,3vw,36px)}
 
-/* Couple names: a calligraphic script face that supports Vietnamese diacritics */
-.wed-name{font-family:"Boheme Floral","Great Vibes","Dancing Script",var(--font-heading),cursive;font-weight:400;letter-spacing:.01em;line-height:1.16;white-space:nowrap}
+/* Couple names: a calligraphic script face that supports Vietnamese diacritics (fonts.ten in config.js) */
+.wed-name{font-family:var(--font-names,"Boheme Floral"),"Great Vibes","Dancing Script",var(--font-heading),cursive;font-weight:400;letter-spacing:.01em;line-height:1.16;white-space:nowrap}
 .wed-amp{font-family:"Great Vibes",var(--font-heading),cursive;font-style:normal;color:var(--color-accent-2)}
 
 /* Photo slot: shows the image set in js/config.js, or a placeholder frame until there is one */

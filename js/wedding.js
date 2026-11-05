@@ -65,6 +65,44 @@
     strip.hidden = false;
   }
 
+  /* ===== Fonts per section (cfg.fonts) ===== */
+  // Each part of the page gets its own --font-heading / --font-body, so everything inside it follows.
+  const FONT_PARTS = {
+    'mo-thiep': '#intro', 'anh-bia': '.wed-hero', 'dem-nguoc': '#dem-nguoc', 'hai-gia-dinh': '#hai-ho',
+    'chuyen-tinh': '#chuyen-tinh', 'lich-trinh': '#su-kien', 'album': '#album', 'mung-cuoi': '#mung-cuoi',
+    'chi-duong': '#chi-duong', 'loi-chuc': '#luu-but', 'chan-trang': '.wed-footer'
+  };
+  const LOCAL_FONTS = ['Boheme Floral'];  // served by @font-face in wedding.css, not by Google Fonts
+  function initFonts() {
+    const fonts = cfg.fonts || {};
+    const loaded = new Set(LOCAL_FONTS);
+    // Google Fonts rejects a request for a weight the family lacks, so fall back to its default weight
+    const load = (name) => {
+      if (loaded.has(name)) return;
+      loaded.add(name);
+      const family = encodeURIComponent(name).replace(/%20/g, '+');
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://fonts.googleapis.com/css2?family=${family}:wght@400;500&display=swap`;
+      link.onerror = () => { link.onerror = null; link.href = `https://fonts.googleapis.com/css2?family=${family}&display=swap`; };
+      document.head.appendChild(link);
+    };
+    const stack = (name, generic) => { load(name); return `"${name}",${generic}`; };
+    const apply = (el, value) => {
+      if (!el || !value) return;
+      const v = typeof value === 'string' ? { tieuDe: value, chu: value } : value;
+      if (v.tieuDe) el.style.setProperty('--font-heading', stack(v.tieuDe, 'serif'));
+      if (v.chu) {
+        el.style.setProperty('--font-body', stack(v.chu, 'serif'));
+        // body text inherits the family body already resolved, so the part has to set it again
+        el.style.fontFamily = 'var(--font-body)';
+      }
+    };
+    if (fonts.ten) root.style.setProperty('--font-names', stack(fonts.ten, 'cursive'));
+    apply(root, fonts.trang);
+    Object.keys(FONT_PARTS).forEach((part) => apply($(FONT_PARTS[part]), fonts[part]));
+  }
+
   /* ===== Optional sections, photos, maps, gift accounts ===== */
   function initSections() {
     const toggle = (sel, on) => { const el = $(sel); if (el && on === false) el.hidden = true; };
@@ -1486,6 +1524,7 @@
   }
 
   initThemes();
+  initFonts();
   const autoScroll = initAutoScroll();
   initIntro();
   // Without the curtains (seen earlier this session, or ?intro=0) the glide starts shortly after load,

@@ -83,6 +83,12 @@ Khi đổi giờ hoặc địa điểm, cần sửa cùng lúc ở 3 nơi: trong
 
 ---
 
+## Đổi font chữ
+- Font của từng phần nằm ở mục `fonts` trong `js/config.js`, xếp đúng thứ tự 11 phần ở trên (`mo-thiep`, `anh-bia`, `dem-nguoc`, … `chan-trang`).
+- Gõ tên font như trên fonts.google.com (vd `'Lora'`), trang tự tải font đó. Để `''` thì phần đó theo font cả trang (`trang`), mặc định là EB Garamond.
+- Tiêu đề và chữ thường khác font: `{ tieuDe: 'Playfair Display', chu: 'Lora' }`.
+- Tên cô dâu chú rể đổi ở `ten` (đang là Boheme Floral). Nhớ chọn font có hỗ trợ tiếng Việt.
+
 ## Lưu ý chung trước khi gửi thiệp
 1. **Backend:** đã nối Google Sheet ✅ (`apiEndpoint` trong `js/config.js`). Sửa `Code.gs` thì triển khai lại bằng "Quản lý các bản triển khai → Phiên bản mới" để giữ nguyên link.
 2. **Ảnh:** đã có ảnh bìa, chú rể, cô dâu, 12 ảnh album, 2 mã QR và ảnh chia sẻ ✅. Ảnh gốc nằm trong `WeddingPictures/` (không đưa lên git).

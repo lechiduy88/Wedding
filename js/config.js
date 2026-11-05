@@ -15,6 +15,27 @@ window.WEDDING_CONFIG = {
   // It stops for good as soon as the guest scrolls, taps or presses a key. 0 turns it off.
   autoScroll: 40,
 
+  // Font chữ, chia theo từng phần của thiệp (xếp theo thứ tự từ trên xuống).
+  // Gõ đúng tên font như trên fonts.google.com (vd 'Lora', 'Playfair Display', 'Dancing Script'): trang tự tải font đó.
+  // Để '' thì phần đó dùng font của cả trang (`trang`); `trang` để '' thì dùng font của theme (EB Garamond).
+  // Muốn tiêu đề và chữ thường trong một phần khác font nhau: { tieuDe: 'Playfair Display', chu: 'Lora' }.
+  // Chọn font có hỗ trợ tiếng Việt (trên Google Fonts: lọc Language → Vietnamese), nếu không chữ có dấu sẽ bị lỗi.
+  fonts: {
+    ten: 'Boheme Floral',  // tên cô dâu chú rể ở mọi chỗ (Boheme Floral là font riêng trong assets/fonts/)
+    trang: '',             // cả trang, áp cho mọi phần bên dưới để ''
+    'mo-thiep': '',        // 1. màn rèm mở thiệp
+    'anh-bia': '',         // 2. ảnh bìa + lời mời
+    'dem-nguoc': '',       // 3. đếm ngược + lịch tháng
+    'hai-gia-dinh': '',    // 4. nhà trai · nhà gái
+    'chuyen-tinh': '',     // 5. cuộn chỉ chuyện tình
+    'lich-trinh': '',      // 6. lịch trình hai buổi lễ
+    'album': '',           // 7. album ảnh
+    'mung-cuoi': '',       // 8. hộp mừng cưới
+    'chi-duong': '',       // 9. bản đồ chỉ đường
+    'loi-chuc': '',        // 10. sổ lưu bút
+    'chan-trang': ''       // 11. chân trang
+  },
+
   showCountdown: true,
   showGift: true,
   showGuestbook: true,

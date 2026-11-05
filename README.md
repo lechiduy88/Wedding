@@ -29,7 +29,7 @@ without a backend.
 | Path | Role |
 | --- | --- |
 | `index.html` | Invitation content (Vietnamese copy) |
-| `js/config.js` | **Everything you normally edit**: theme, backend URL, wish presets, photos, map links, bank accounts |
+| `js/config.js` | **Everything you normally edit**: theme, fonts per section (`fonts`), backend URL, wish presets, photos, map links, bank accounts |
 | `js/wedding.js` | Theme switcher, countdown, scroll reveal, RSVP + guestbook forms, petal backdrop |
 | `css/classical.css` | Classical design system, kept verbatim from the design project |
 | `css/wedding.css` | The five palettes and the page layout |
